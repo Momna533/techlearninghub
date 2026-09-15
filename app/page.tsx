@@ -1,21 +1,9 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { DM_Mono, DM_Sans } from "next/font/google";
 import { useEffect, useState } from "react";
-
-const dmMono = DM_Mono({
-  variable: "--font-dm-mono",
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 const navigation = [
   { label: "Home", href: "/" },
@@ -104,6 +92,8 @@ const betterItems = [
 ];
 
 export default function HomePage() {
+  const pathname = usePathname();
+
   const [activeSlide, setActiveSlide] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -123,7 +113,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className={`${dmSans.variable} ${dmMono.variable} bg-white`}>
+    <main className={` bg-white`}>
       <section className="relative min-h-[80%] overflow-hidden bg-[linear-gradient(180deg,rgb(7,27,54)_0%,rgb(11,35,69)_35%,rgb(13,45,90)_50%,rgb(11,35,69)_65%,rgb(7,27,54)_100%)]">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute -left-32 top-20 h-72 w-72 rounded-full bg-blue-100/30 blur-3xl animate-[pulse_8s_ease-in-out_infinite]" />
@@ -164,15 +154,25 @@ export default function HomePage() {
               </Link>
 
               <div className="hidden items-center gap-5 lg:flex xl:gap-7">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className="whitespace-nowrap font-dm-sans text-sm font-medium text-[#071b36] transition-colors duration-300 hover:text-[#0d2d5a]"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                {navigation.map((item) => {
+                  const isActive =
+                    pathname === item.href ||
+                    (item.href !== "/" && pathname.startsWith(`${item.href}/`));
+
+                  return (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      className={`whitespace-nowrap font-dm-sans text-sm font-medium transition-colors duration-300 ${
+                        isActive
+                          ? "text-[#0d2d5a] border-b-2 border-[#ffc400] focus-visible:outline-none"
+                          : "text-[#071b36] hover:text-[#0d2d5a] border-b-2 border-transparent hover:border-[#ffc400] focus-visible:border-[#ffc400] focus-visible:outline-none"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
 
                 <Link
                   href="https://wa.me/923080777142"
@@ -240,7 +240,7 @@ export default function HomePage() {
                       key={item.label}
                       href={item.href}
                       onClick={() => setMenuOpen(false)}
-                      className="flex min-h-14 items-center border-b border-slate-200 px-2 font-dm-sans text-lg font-medium text-[#071b36] transition-colors duration-300 hover:text-[#0d2d5a]"
+                      className="flex min-h-14 items-center border-b border-slate-200 px-2 font-dm-sans text-lg font-medium text-[#071b36] transition-colors duration-300 hover:text-[#0d2d5a] hover:border-[#ffc400] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffc400] sm:min-h-16 sm:text-xl"
                     >
                       {item.label}
                     </Link>
@@ -270,7 +270,7 @@ export default function HomePage() {
               <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-2 backdrop-blur-sm transition-all duration-500 hover:border-[#ffc400]/40 hover:bg-white/15 sm:mb-6 sm:px-4">
                 <span className="h-2 w-2 rounded-full bg-[#ffc400] shadow-[0_0_12px_rgba(255,196,0,0.65)]" />
 
-                <span className="font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-white sm:text-xs sm:tracking-[0.16em]">
+                <span className="font-dm-mono text-[11px] font-medium uppercase tracking-[0.14em] text-white sm:text-xs sm:tracking-[0.16em]">
                   {slide.eyebrow}
                 </span>
               </div>
@@ -429,10 +429,6 @@ export default function HomePage() {
                     Before
                   </h3>
                 </div>
-
-                <span className="font-dm-mono text-sm text-slate-300 transition-colors duration-300 group-hover:text-slate-400">
-                  01
-                </span>
               </div>
 
               <div className="mt-7 space-y-5">
@@ -480,8 +476,6 @@ export default function HomePage() {
                     With us
                   </h3>
                 </div>
-
-                <span className="font-dm-mono text-sm text-white/30">02</span>
               </div>
 
               <div className="relative mt-7 space-y-5">
@@ -508,244 +502,9 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-
-          <div className="mt-12 flex flex-col items-center justify-between gap-5 border-t border-slate-200 pt-8 sm:mt-14 sm:flex-row">
-            <p className="max-w-xl text-center font-dm-sans text-sm leading-6 text-slate-500 sm:text-left">
-              Whether you are learning a new skill or building a digital
-              solution, the goal is the same:{" "}
-              <span className="font-semibold text-[#071b36]">
-                make technology useful.
-              </span>
-            </p>
-
-            <Link
-              href="/services"
-              className="group inline-flex min-h-12 items-center gap-4 rounded-2xl bg-[#071b36] px-5 font-dm-sans text-base font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0d2d5a] hover:shadow-lg hover:shadow-[#071b36]/10"
-            >
-              <span>See What We Do</span>
-
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#ffc400] text-[#071b36] transition-transform duration-300 group-hover:translate-x-1">
-                ↗
-              </span>
-            </Link>
-          </div>
         </div>
       </section>
-      <section className="relative overflow-hidden bg-[#f8fafc] py-20 sm:py-24 lg:py-28">
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute -right-40 top-20 h-80 w-80 rounded-full bg-blue-100/30 blur-3xl animate-[pulse_10s_ease-in-out_infinite]" />
-          <div className="absolute -left-40 bottom-0 h-72 w-72 rounded-full bg-[#ffc400]/[0.04] blur-3xl animate-[pulse_12s_ease-in-out_infinite]" />
-        </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-3xl">
-              <div className="mb-5 inline-flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#ffc400]" />
-
-                <span className="font-dm-mono text-[10px] font-medium uppercase tracking-[0.16em] text-slate-500 sm:text-xs">
-                  What We Do
-                </span>
-              </div>
-
-              <h2 className="font-hikasani text-3xl font-bold leading-[1.05] tracking-[-0.035em] text-[#071b36] sm:text-4xl md:text-5xl lg:text-6xl">
-                Technology built
-                <br className="hidden sm:block" />
-                for{" "}
-                <span className="inline-flex items-center gap-3 text-[#0d2d5a]">
-                  real needs
-                  <span className="mb-1.5 h-2.5 w-2.5 rounded-full bg-[#ffc400] shadow-[0_0_14px_rgba(255,196,0,0.35)] sm:h-3 sm:w-3" />
-                </span>
-                .
-              </h2>
-
-              <p className="mt-5 max-w-2xl font-dm-sans text-sm leading-6 text-slate-500 sm:mt-6 sm:text-base sm:leading-7">
-                From digital products and software to websites and applications,
-                we create practical technology solutions designed around real
-                people, businesses and their goals.
-              </p>
-            </div>
-
-            <Link
-              href="/services"
-              className="group inline-flex w-fit items-center gap-4 rounded-2xl border border-slate-300 bg-white px-5 py-3.5 font-dm-sans text-base font-semibold text-[#071b36] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ffc400]/50 hover:shadow-md"
-            >
-              <span>View All Services</span>
-
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#071b36]/5 transition-all duration-300 group-hover:bg-[#ffc400] group-hover:translate-x-1">
-                ↗
-              </span>
-            </Link>
-          </div>
-
-          <div className="mt-12 grid gap-4 sm:mt-14 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
-            <Link
-              href="/websites"
-              className="group relative flex min-h-[330px] flex-col justify-between overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-200/50 sm:p-7"
-            >
-              <div className="pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full bg-[#ffc400]/[0.05] blur-3xl transition-transform duration-700 group-hover:scale-150" />
-
-              <div className="relative">
-                <div className="flex items-start justify-between">
-                  <span className="font-dm-mono text-xs text-slate-400 transition-colors duration-300 group-hover:text-[#ffc400]">
-                    01
-                  </span>
-
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#071b36] text-lg text-white transition-all duration-300 group-hover:rotate-45 group-hover:bg-[#ffc400] group-hover:text-[#071b36]">
-                    ↗
-                  </span>
-                </div>
-
-                <h3 className="font-hikasani mt-10 text-2xl font-bold tracking-[-0.02em] text-[#071b36] sm:text-3xl">
-                  Websites
-                </h3>
-
-                <p className="mt-4 font-dm-sans text-sm leading-6 text-slate-500">
-                  Modern, responsive websites designed to give businesses and
-                  organizations a strong digital presence.
-                </p>
-              </div>
-
-              <div className="relative mt-8 flex items-center gap-2 font-dm-mono text-[10px] uppercase tracking-[0.12em] text-slate-400 transition-colors duration-300 group-hover:text-[#071b36]">
-                Explore Service
-                <span className="transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
-              </div>
-            </Link>
-
-            <Link
-              href="/softwares"
-              className="group relative flex min-h-[330px] flex-col justify-between overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-200/50 sm:p-7"
-            >
-              <div className="pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full bg-[#ffc400]/[0.05] blur-3xl transition-transform duration-700 group-hover:scale-150" />
-
-              <div className="relative">
-                <div className="flex items-start justify-between">
-                  <span className="font-dm-mono text-xs text-slate-400 transition-colors duration-300 group-hover:text-[#ffc400]">
-                    02
-                  </span>
-
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#071b36] text-lg text-white transition-all duration-300 group-hover:rotate-45 group-hover:bg-[#ffc400] group-hover:text-[#071b36]">
-                    ↗
-                  </span>
-                </div>
-
-                <h3 className="font-hikasani mt-10 text-2xl font-bold tracking-[-0.02em] text-[#071b36] sm:text-3xl">
-                  Software
-                </h3>
-
-                <p className="mt-4 font-dm-sans text-sm leading-6 text-slate-500">
-                  Purpose-built software solutions that help businesses manage,
-                  automate and improve the way they work.
-                </p>
-              </div>
-
-              <div className="relative mt-8 flex items-center gap-2 font-dm-mono text-[10px] uppercase tracking-[0.12em] text-slate-400 transition-colors duration-300 group-hover:text-[#071b36]">
-                Explore Service
-                <span className="transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
-              </div>
-            </Link>
-
-            <Link
-              href="/apps"
-              className="group relative flex min-h-[330px] flex-col justify-between overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-200/50 sm:p-7"
-            >
-              <div className="pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full bg-[#ffc400]/[0.05] blur-3xl transition-transform duration-700 group-hover:scale-150" />
-
-              <div className="relative">
-                <div className="flex items-start justify-between">
-                  <span className="font-dm-mono text-xs text-slate-400 transition-colors duration-300 group-hover:text-[#ffc400]">
-                    03
-                  </span>
-
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#071b36] text-lg text-white transition-all duration-300 group-hover:rotate-45 group-hover:bg-[#ffc400] group-hover:text-[#071b36]">
-                    ↗
-                  </span>
-                </div>
-
-                <h3 className="font-hikasani mt-10 text-2xl font-bold tracking-[-0.02em] text-[#071b36] sm:text-3xl">
-                  Applications
-                </h3>
-
-                <p className="mt-4 font-dm-sans text-sm leading-6 text-slate-500">
-                  Digital applications created to solve specific problems and
-                  provide useful experiences for users.
-                </p>
-              </div>
-
-              <div className="relative mt-8 flex items-center gap-2 font-dm-mono text-[10px] uppercase tracking-[0.12em] text-slate-400 transition-colors duration-300 group-hover:text-[#071b36]">
-                Explore Service
-                <span className="transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
-              </div>
-            </Link>
-
-            <Link
-              href="/services"
-              className="group relative flex min-h-[330px] flex-col justify-between overflow-hidden rounded-3xl bg-[#071b36] p-6 text-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-300/40 sm:p-7"
-            >
-              <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-[#ffc400]/[0.07] blur-3xl transition-transform duration-1000 group-hover:scale-125" />
-
-              <div className="absolute left-0 top-8 h-16 w-0.5 bg-[#ffc400]" />
-
-              <div className="relative">
-                <div className="flex items-start justify-between">
-                  <span className="font-dm-mono text-xs text-white/30 transition-colors duration-300 group-hover:text-[#ffc400]">
-                    04
-                  </span>
-
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-lg text-[#071b36] transition-all duration-300 group-hover:rotate-45 group-hover:bg-[#ffc400]">
-                    ↗
-                  </span>
-                </div>
-
-                <h3 className="font-hikasani mt-10 text-2xl font-bold tracking-[-0.02em] text-white sm:text-3xl">
-                  Digital Solutions
-                </h3>
-
-                <p className="mt-4 font-dm-sans text-sm leading-6 text-slate-300">
-                  Bring your ideas together with practical technology solutions
-                  built around your goals and requirements.
-                </p>
-              </div>
-
-              <div className="relative mt-8 flex items-center gap-2 font-dm-mono text-[10px] uppercase tracking-[0.12em] text-white/40 transition-colors duration-300 group-hover:text-[#ffc400]">
-                Explore Services
-                <span className="transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
-              </div>
-            </Link>
-          </div>
-
-          <div className="mt-8 flex flex-col gap-5 rounded-3xl border border-slate-200 bg-white p-6 transition-all duration-500 hover:border-slate-300 hover:shadow-lg sm:mt-10 sm:p-8 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <p className="font-dm-mono text-[10px] uppercase tracking-[0.14em] text-slate-400">
-                Have something in mind?
-              </p>
-
-              <h3 className="font-hikasani mt-2 text-xl font-bold text-[#071b36] sm:text-2xl">
-                Let&apos;s turn your idea into something useful.
-              </h3>
-            </div>
-
-            <Link
-              href="/contact"
-              className="group inline-flex min-h-12 items-center justify-between gap-5 rounded-2xl bg-[#071b36] px-5 font-dm-sans text-base font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0d2d5a]"
-            >
-              <span>Start a Conversation</span>
-
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#ffc400] text-[#071b36] transition-transform duration-300 group-hover:translate-x-1">
-                ↗
-              </span>
-            </Link>
-          </div>
-        </div>
-      </section>
       <section
         id="courses"
         className="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28"
@@ -798,169 +557,210 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-12 grid gap-5 sm:mt-14 lg:mt-16 lg:grid-cols-[1.15fr_0.85fr]">
-            <div className="group relative overflow-hidden rounded-3xl bg-[#071b36] p-7 text-white shadow-xl shadow-slate-300/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl sm:p-9 lg:p-10">
-              <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#ffc400]/[0.07] blur-3xl transition-transform duration-1000 group-hover:scale-125" />
-              <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl" />
-
-              <div className="absolute left-0 top-8 h-16 w-0.5 bg-[#ffc400]" />
-
-              <div className="relative">
-                <div className="flex items-start justify-between gap-5">
-                  <div>
-                    <span className="font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#ffc400]/80">
-                      Learn by doing
-                    </span>
-
-                    <h3 className="font-hikasani mt-3 max-w-lg text-3xl font-bold leading-tight sm:text-4xl">
-                      From learning
-                      <br />
-                      to building.
-                    </h3>
-                  </div>
-
-                  <span className="font-dm-mono text-sm text-white/30">01</span>
-                </div>
-
-                <p className="relative mt-6 max-w-xl font-dm-sans text-sm leading-6 text-slate-300 sm:text-base sm:leading-7">
-                  Our learning approach connects concepts with practice. You
-                  learn something, apply it, build with it and understand how it
-                  works in a real situation.
-                </p>
-
-                <div className="relative mt-8 grid gap-3 sm:grid-cols-3">
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4 transition-all duration-300 hover:border-[#ffc400]/30 hover:bg-[#ffc400]/[0.05]">
-                    <span className="font-dm-mono text-[10px] uppercase tracking-[0.12em] text-[#ffc400]/60">
-                      01
-                    </span>
-
-                    <h4 className="font-hikasani mt-3 text-base font-semibold text-white">
-                      Learn
-                    </h4>
-
-                    <p className="mt-1.5 font-dm-sans text-xs leading-5 text-slate-400">
-                      Understand the foundation.
-                    </p>
-                  </div>
-
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4 transition-all duration-300 hover:border-[#ffc400]/30 hover:bg-[#ffc400]/[0.05]">
-                    <span className="font-dm-mono text-[10px] uppercase tracking-[0.12em] text-[#ffc400]/60">
-                      02
-                    </span>
-
-                    <h4 className="font-hikasani mt-3 text-base font-semibold text-white">
-                      Build
-                    </h4>
-
-                    <p className="mt-1.5 font-dm-sans text-xs leading-5 text-slate-400">
-                      Turn knowledge into projects.
-                    </p>
-                  </div>
-
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4 transition-all duration-300 hover:border-[#ffc400]/30 hover:bg-[#ffc400]/[0.05]">
-                    <span className="font-dm-mono text-[10px] uppercase tracking-[0.12em] text-[#ffc400]/60">
-                      03
-                    </span>
-
-                    <h4 className="font-hikasani mt-3 text-base font-semibold text-white">
-                      Apply
-                    </h4>
-
-                    <p className="mt-1.5 font-dm-sans text-xs leading-5 text-slate-400">
-                      Use skills in real situations.
-                    </p>
-                  </div>
-                </div>
-
-                <Link
-                  href="/courses"
-                  className="group relative mt-8 inline-flex items-center gap-3 font-dm-sans text-sm font-semibold text-white transition-colors duration-300 hover:text-[#ffc400]"
-                >
-                  <span>Start Learning</span>
-
-                  <span className="transition-transform duration-300 group-hover:translate-x-1">
-                    →
-                  </span>
-                </Link>
+          <div className="mt-12 grid gap-5 sm:mt-14 md:grid-cols-2 lg:mt-16 lg:grid-cols-3">
+            <Link
+              href="/courses/mern-stack-development"
+              className="group rounded-3xl border border-slate-200 bg-slate-50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:bg-white hover:shadow-lg sm:p-7"
+            >
+              <div className="flex items-start justify-between gap-5">
+                <span className="text-lg text-[#071b36] transition-transform duration-300 group-hover:translate-x-1">
+                  ↗
+                </span>
               </div>
-            </div>
 
-            <div className="grid gap-5">
-              <Link
-                href="/courses"
-                className="group rounded-3xl border border-slate-200 bg-slate-50/80 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-slate-300 hover:bg-white hover:shadow-lg sm:p-8"
-              >
-                <div className="flex items-start justify-between gap-5">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#071b36] font-dm-mono text-sm text-white transition-colors duration-300 group-hover:bg-[#ffc400] group-hover:text-[#071b36]">
-                    01
-                  </div>
-
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#071b36] shadow-sm transition-all duration-300 group-hover:bg-[#ffc400] group-hover:translate-x-1">
-                    ↗
-                  </span>
-                </div>
-
-                <h3 className="font-hikasani mt-7 text-2xl font-bold text-[#071b36] sm:text-3xl">
-                  Technology Skills
-                </h3>
-
-                <p className="mt-3 font-dm-sans text-sm leading-6 text-slate-500">
-                  Develop practical digital and technology skills through
-                  structured learning and hands-on projects.
-                </p>
-              </Link>
-
-              <Link
-                href="/courses"
-                className="group rounded-3xl border border-slate-200 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-slate-300 hover:shadow-lg sm:p-8"
-              >
-                <div className="flex items-start justify-between gap-5">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#0d2d5a] font-dm-mono text-sm text-white transition-colors duration-300 group-hover:bg-[#ffc400] group-hover:text-[#071b36]">
-                    02
-                  </div>
-
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-50 text-[#071b36] shadow-sm transition-all duration-300 group-hover:bg-[#ffc400] group-hover:translate-x-1">
-                    ↗
-                  </span>
-                </div>
-
-                <h3 className="font-hikasani mt-7 text-2xl font-bold text-[#071b36] sm:text-3xl">
-                  Career-Focused Learning
-                </h3>
-
-                <p className="mt-3 font-dm-sans text-sm leading-6 text-slate-500">
-                  Build confidence through useful skills, practical experience
-                  and projects that move you closer to your goals.
-                </p>
-              </Link>
-            </div>
-          </div>
-
-          <div className="mt-8 flex flex-col gap-5 rounded-3xl border border-slate-200 bg-[#f8fafc] p-6 transition-all duration-500 hover:border-slate-300 sm:mt-10 sm:p-8 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <span className="font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400">
-                For learners
+              <span className="mt-7 block font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400">
+                Web Development
               </span>
 
-              <h3 className="font-hikasani mt-2 text-2xl font-bold text-[#071b36] sm:text-3xl">
-                Ready to build something?
+              <h3 className="font-hikasani mt-2 text-2xl font-bold text-[#071b36]">
+                MERN Stack Development
               </h3>
 
-              <p className="mt-2 max-w-2xl font-dm-sans text-sm leading-6 text-slate-500">
-                Explore our courses and find a practical starting point for your
-                learning journey.
+              <p className="mt-3 font-dm-sans text-sm leading-6 text-slate-500">
+                Learn MongoDB, Express, React and Node.js by building modern,
+                full-stack web applications from frontend to backend.
               </p>
-            </div>
+
+              <div className="mt-6 flex items-center justify-between border-t border-slate-200 pt-4">
+                <span className="font-dm-sans text-xs font-medium text-slate-400">
+                  Beginner → Advanced
+                </span>
+
+                <span className="font-dm-sans text-sm font-semibold text-[#071b36]">
+                  Explore
+                </span>
+              </div>
+            </Link>
 
             <Link
-              href="/courses"
-              className="group inline-flex min-h-12 w-fit items-center gap-4 rounded-2xl bg-[#071b36] px-5 font-dm-sans text-base font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0d2d5a]"
+              href="/courses/full-stack-development"
+              className="group rounded-3xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-lg sm:p-7"
             >
-              <span>Find a Course</span>
+              <div className="flex items-start justify-between gap-5">
+                <span className="text-lg text-[#071b36] transition-transform duration-300 group-hover:translate-x-1">
+                  ↗
+                </span>
+              </div>
 
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#ffc400] text-[#071b36] transition-transform duration-300 group-hover:translate-x-1">
-                ↗
+              <span className="mt-7 block font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400">
+                Software Development
               </span>
+
+              <h3 className="font-hikasani mt-2 text-2xl font-bold text-[#071b36]">
+                Full-Stack Development
+              </h3>
+
+              <p className="mt-3 font-dm-sans text-sm leading-6 text-slate-500">
+                Build complete web solutions while learning frontend, backend,
+                databases, APIs and real-world development workflows.
+              </p>
+
+              <div className="mt-6 flex items-center justify-between border-t border-slate-200 pt-4">
+                <span className="font-dm-sans text-xs font-medium text-slate-400">
+                  Intermediate → Advanced
+                </span>
+
+                <span className="font-dm-sans text-sm font-semibold text-[#071b36]">
+                  Explore
+                </span>
+              </div>
+            </Link>
+
+            <Link
+              href="/courses/ai-machine-learning"
+              className="group rounded-3xl border border-slate-200 bg-slate-50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:bg-white hover:shadow-lg sm:p-7"
+            >
+              <div className="flex items-start justify-between gap-5">
+                <span className="text-lg text-[#071b36] transition-transform duration-300 group-hover:translate-x-1">
+                  ↗
+                </span>
+              </div>
+
+              <span className="mt-7 block font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400">
+                Emerging Technology
+              </span>
+
+              <h3 className="font-hikasani mt-2 text-2xl font-bold text-[#071b36]">
+                AI & Machine Learning
+              </h3>
+
+              <p className="mt-3 font-dm-sans text-sm leading-6 text-slate-500">
+                Build a foundation in Python, data, machine learning and
+                practical AI applications for modern digital products.
+              </p>
+
+              <div className="mt-6 flex items-center justify-between border-t border-slate-200 pt-4">
+                <span className="font-dm-sans text-xs font-medium text-slate-400">
+                  Beginner → Advanced
+                </span>
+
+                <span className="font-dm-sans text-sm font-semibold text-[#071b36]">
+                  Explore
+                </span>
+              </div>
+            </Link>
+
+            <Link
+              href="/courses/ecommerce-marketplace"
+              className="group rounded-3xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-lg sm:p-7"
+            >
+              <div className="flex items-start justify-between gap-5">
+                <span className="text-lg text-[#071b36] transition-transform duration-300 group-hover:translate-x-1">
+                  ↗
+                </span>
+              </div>
+
+              <span className="mt-7 block font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400">
+                E-Commerce
+              </span>
+
+              <h3 className="font-hikasani mt-2 text-2xl font-bold text-[#071b36]">
+                E-Commerce & Marketplace
+              </h3>
+
+              <p className="mt-3 font-dm-sans text-sm leading-6 text-slate-500">
+                Learn how to launch and manage online stores across platforms
+                such as TikTok Shop, eBay and other digital marketplaces.
+              </p>
+
+              <div className="mt-6 flex items-center justify-between border-t border-slate-200 pt-4">
+                <span className="font-dm-sans text-xs font-medium text-slate-400">
+                  Beginner → Intermediate
+                </span>
+
+                <span className="font-dm-sans text-sm font-semibold text-[#071b36]">
+                  Explore
+                </span>
+              </div>
+            </Link>
+
+            <Link
+              href="/courses/digital-marketing"
+              className="group rounded-3xl border border-slate-200 bg-slate-50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:bg-white hover:shadow-lg sm:p-7"
+            >
+              <div className="flex items-start justify-between gap-5">
+                <span className="text-lg text-[#071b36] transition-transform duration-300 group-hover:translate-x-1">
+                  ↗
+                </span>
+              </div>
+
+              <span className="mt-7 block font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400">
+                Digital Business
+              </span>
+
+              <h3 className="font-hikasani mt-2 text-2xl font-bold text-[#071b36]">
+                Digital Marketing
+              </h3>
+
+              <p className="mt-3 font-dm-sans text-sm leading-6 text-slate-500">
+                Develop practical skills in social media, content, advertising,
+                SEO and digital strategies for growing online businesses.
+              </p>
+
+              <div className="mt-6 flex items-center justify-between border-t border-slate-200 pt-4">
+                <span className="font-dm-sans text-xs font-medium text-slate-400">
+                  Beginner → Advanced
+                </span>
+
+                <span className="font-dm-sans text-sm font-semibold text-[#071b36]">
+                  Explore
+                </span>
+              </div>
+            </Link>
+
+            <Link
+              href="/courses/office-management"
+              className="group rounded-3xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-lg sm:p-7"
+            >
+              <div className="flex items-start justify-between gap-5">
+                <span className="text-lg text-[#071b36] transition-transform duration-300 group-hover:translate-x-1">
+                  ↗
+                </span>
+              </div>
+
+              <span className="mt-7 block font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400">
+                Professional Skills
+              </span>
+
+              <h3 className="font-hikasani mt-2 text-2xl font-bold text-[#071b36]">
+                Office & Management
+              </h3>
+
+              <p className="mt-3 font-dm-sans text-sm leading-6 text-slate-500">
+                Build practical workplace skills in Microsoft Office,
+                communication, administration, organization and office
+                management.
+              </p>
+
+              <div className="mt-6 flex items-center justify-between border-t border-slate-200 pt-4">
+                <span className="font-dm-sans text-xs font-medium text-slate-400">
+                  Beginner → Intermediate
+                </span>
+
+                <span className="font-dm-sans text-sm font-semibold text-[#071b36]">
+                  Explore
+                </span>
+              </div>
             </Link>
           </div>
         </div>
@@ -1012,116 +812,69 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 transition-all duration-500 hover:-translate-y-1 hover:border-[#ffc400]/20 hover:bg-white/[0.07] hover:shadow-xl hover:shadow-black/10 sm:p-8">
-                <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#ffc400]/[0.04] blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="grid gap-0 sm:grid-cols-2">
+              <div className="border-b border-white/10 py-7 sm:border-r sm:pr-8">
+                <div className="flex items-start gap-5">
+                  <div>
+                    <h3 className="font-hikasani text-2xl font-bold text-white">
+                      Practical First
+                    </h3>
 
-                <div className="relative flex items-start justify-between">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 font-dm-mono text-sm text-slate-300 transition-all duration-300 group-hover:bg-[#ffc400] group-hover:text-[#071b36]">
-                    01
-                  </span>
-                  <span className="font-dm-mono text-xs text-white/20 transition-colors duration-300 group-hover:text-[#ffc400]/60">
-                    FOCUS
-                  </span>
+                    <p className="mt-3 font-dm-sans text-sm leading-6 text-slate-400">
+                      We focus on what can actually be learned, built, used and
+                      improved rather than technology for technology's sake.
+                    </p>
+                  </div>
                 </div>
-
-                <h3 className="font-hikasani relative mt-8 text-2xl font-bold text-white">
-                  Practical First
-                </h3>
-
-                <p className="relative mt-3 font-dm-sans text-sm leading-6 text-slate-400">
-                  We focus on what can actually be learned, built, used and
-                  improved rather than technology for technology's sake.
-                </p>
               </div>
 
-              <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 transition-all duration-500 hover:-translate-y-1 hover:border-[#ffc400]/20 hover:bg-white/[0.07] hover:shadow-xl hover:shadow-black/10 sm:p-8">
-                <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#ffc400]/[0.04] blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="border-b border-white/10 py-7 sm:pl-8">
+                <div className="flex items-start gap-5">
+                  <div>
+                    <h3 className="font-hikasani text-2xl font-bold text-white">
+                      Built Around You
+                    </h3>
 
-                <div className="relative flex items-start justify-between">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 font-dm-mono text-sm text-slate-300 transition-all duration-300 group-hover:bg-[#ffc400] group-hover:text-[#071b36]">
-                    02
-                  </span>
-                  <span className="font-dm-mono text-xs text-white/20 transition-colors duration-300 group-hover:text-[#ffc400]/60">
-                    APPROACH
-                  </span>
+                    <p className="mt-3 font-dm-sans text-sm leading-6 text-slate-400">
+                      Every learner, idea and business has different needs. We
+                      design our approach around the outcome that matters to
+                      you.
+                    </p>
+                  </div>
                 </div>
-
-                <h3 className="font-hikasani relative mt-8 text-2xl font-bold text-white">
-                  Built Around You
-                </h3>
-
-                <p className="relative mt-3 font-dm-sans text-sm leading-6 text-slate-400">
-                  Every learner, idea and business has different needs. We
-                  design our approach around the outcome that matters to you.
-                </p>
               </div>
 
-              <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 transition-all duration-500 hover:-translate-y-1 hover:border-[#ffc400]/20 hover:bg-white/[0.07] hover:shadow-xl hover:shadow-black/10 sm:p-8">
-                <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#ffc400]/[0.04] blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="border-b border-white/10 py-7 sm:border-b-0 sm:border-r sm:pr-8">
+                <div className="flex items-start gap-5">
+                  <div>
+                    <h3 className="font-hikasani text-2xl font-bold text-white">
+                      Learn From Doing
+                    </h3>
 
-                <div className="relative flex items-start justify-between">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 font-dm-mono text-sm text-slate-300 transition-all duration-300 group-hover:bg-[#ffc400] group-hover:text-[#071b36]">
-                    03
-                  </span>
-                  <span className="font-dm-mono text-xs text-white/20 transition-colors duration-300 group-hover:text-[#ffc400]/60">
-                    EXPERIENCE
-                  </span>
+                    <p className="mt-3 font-dm-sans text-sm leading-6 text-slate-400">
+                      Real understanding comes from applying knowledge. Our work
+                      connects learning with projects, problems and practical
+                      use.
+                    </p>
+                  </div>
                 </div>
-
-                <h3 className="font-hikasani relative mt-8 text-2xl font-bold text-white">
-                  Learn From Doing
-                </h3>
-
-                <p className="relative mt-3 font-dm-sans text-sm leading-6 text-slate-400">
-                  Real understanding comes from applying knowledge. Our work
-                  connects learning with projects, problems and practical use.
-                </p>
               </div>
 
-              <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 transition-all duration-500 hover:-translate-y-1 hover:border-[#ffc400]/20 hover:bg-white/[0.07] hover:shadow-xl hover:shadow-black/10 sm:p-8">
-                <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#ffc400]/[0.04] blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="py-7 sm:pl-8">
+                <div className="flex items-start gap-5">
+                  <div>
+                    <h3 className="font-hikasani text-2xl font-bold text-white">
+                      Built To Be Useful
+                    </h3>
 
-                <div className="relative flex items-start justify-between">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 font-dm-mono text-sm text-slate-300 transition-all duration-300 group-hover:bg-[#ffc400] group-hover:text-[#071b36]">
-                    04
-                  </span>
-                  <span className="font-dm-mono text-xs text-white/20 transition-colors duration-300 group-hover:text-[#ffc400]/60">
-                    OUTCOME
-                  </span>
+                    <p className="mt-3 font-dm-sans text-sm leading-6 text-slate-400">
+                      Whether it is a new skill or a digital solution, our goal
+                      is to create something useful beyond the learning or
+                      development process itself.
+                    </p>
+                  </div>
                 </div>
-
-                <h3 className="font-hikasani relative mt-8 text-2xl font-bold text-white">
-                  Built To Be Useful
-                </h3>
-
-                <p className="relative mt-3 font-dm-sans text-sm leading-6 text-slate-400">
-                  Whether it is a new skill or a digital solution, our goal is
-                  to create something useful beyond the learning or development
-                  process itself.
-                </p>
               </div>
-            </div>
-          </div>
-
-          <div className="mt-14 border-t border-white/10 pt-8 sm:mt-16 sm:pt-10">
-            <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-              <p className="max-w-2xl font-dm-sans text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">
-                Different needs. Different challenges. One simple goal:
-                <span className="ml-1 font-semibold text-white">
-                  create meaningful results.
-                </span>
-              </p>
-
-              <Link
-                href="/contact"
-                className="group inline-flex min-h-12 w-fit items-center gap-4 rounded-2xl bg-white px-5 font-dm-sans text-base font-semibold text-[#071b36] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ffc400] hover:shadow-lg hover:shadow-[#ffc400]/10"
-              >
-                <span>Work With Us</span>
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#071b36]/5 transition-transform duration-300 group-hover:translate-x-1">
-                  ↗
-                </span>
-              </Link>
             </div>
           </div>
         </div>
@@ -1162,166 +915,128 @@ export default function HomePage() {
                 goals.
               </p>
             </div>
-
-            <Link
-              href="/projects"
-              className="group inline-flex w-fit items-center gap-4 rounded-2xl border border-slate-300 bg-white px-5 py-3.5 font-dm-sans text-base font-semibold text-[#071b36] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ffc400]/60 hover:shadow-md"
-            >
-              <span>View All Work</span>
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#071b36]/5 transition-all duration-300 group-hover:bg-[#ffc400] group-hover:translate-x-1">
-                ↗
-              </span>
-            </Link>
           </div>
 
-          <div className="mt-12 grid gap-5 sm:mt-14 lg:mt-16 lg:grid-cols-[1.25fr_0.75fr]">
+          <div className="mt-12 grid border-y border-slate-200 sm:grid-cols-3 lg:mt-14">
             <Link
-              href="/projects"
-              className="group relative min-h-[430px] overflow-hidden rounded-3xl bg-[#071b36] p-7 text-white shadow-xl shadow-slate-300/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#071b36]/15 sm:p-9 lg:min-h-[500px] lg:p-10"
+              href="/projects/web"
+              className="group relative border-b border-slate-200 px-5 py-8 transition-all duration-300 hover:bg-white sm:border-b-0 sm:border-r sm:px-7 sm:py-9 lg:px-8"
             >
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,rgba(59,130,246,0.18),transparent_35%),radial-gradient(circle_at_20%_80%,rgba(255,196,0,0.06),transparent_35%)]" />
+              <div className="absolute left-0 top-0 h-0 w-0.5 bg-[#ffc400] transition-all duration-300 group-hover:h-full" />
 
-              <div className="absolute left-0 top-10 h-16 w-0.5 bg-[#ffc400]" />
-
-              <div className="absolute right-8 top-8 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg transition-all duration-300 group-hover:-translate-y-1 group-hover:border-[#ffc400]/40 group-hover:bg-[#ffc400] group-hover:text-[#071b36]">
-                ↗
+              <div className="flex items-center justify-between">
+                <span className="font-dm-mono text-sm text-slate-300 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#ffc400]">
+                  ↗
+                </span>
               </div>
 
-              <div className="relative flex h-full flex-col justify-between">
-                <div>
-                  <span className="font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#ffc400]/80">
-                    Featured Project
-                  </span>
+              <h3 className="font-hikasani mt-8 text-2xl font-bold text-[#071b36] transition-colors duration-300 group-hover:text-[#0d2d5a] sm:text-3xl">
+                Web Projects
+              </h3>
 
-                  <h3 className="font-hikasani mt-5 max-w-xl text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
-                    Digital experiences
-                    <br />
-                    built for people.
-                  </h3>
+              <p className="mt-3 max-w-sm font-dm-sans text-sm leading-6 text-slate-500">
+                Websites and web applications built for businesses,
+                organizations and digital products.
+              </p>
 
-                  <p className="mt-5 max-w-lg font-dm-sans text-sm leading-6 text-slate-300 sm:text-base sm:leading-7">
-                    From the first idea to the final product, we bring together
-                    design, development and technology to create digital
-                    experiences that are simple, useful and effective.
-                  </p>
-                </div>
+              <div className="mt-7 flex flex-wrap gap-2">
+                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 font-dm-mono text-[9px] uppercase tracking-[0.08em] text-slate-500 transition-all duration-300 group-hover:border-[#ffc400]/30 group-hover:bg-[#ffc400]/10 group-hover:text-[#0d2d5a]">
+                  Business Websites
+                </span>
 
-                <div className="mt-12 flex flex-wrap gap-2">
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 font-dm-mono text-[10px] uppercase tracking-[0.1em] text-slate-300 transition-colors duration-300 group-hover:border-[#ffc400]/20">
-                    Web
-                  </span>
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 font-dm-mono text-[10px] uppercase tracking-[0.1em] text-slate-300 transition-colors duration-300 group-hover:border-[#ffc400]/20">
-                    Software
-                  </span>
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 font-dm-mono text-[10px] uppercase tracking-[0.1em] text-slate-300 transition-colors duration-300 group-hover:border-[#ffc400]/20">
-                    Digital
-                  </span>
-                </div>
+                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 font-dm-mono text-[9px] uppercase tracking-[0.08em] text-slate-500 transition-all duration-300 group-hover:border-[#ffc400]/30 group-hover:bg-[#ffc400]/10 group-hover:text-[#0d2d5a]">
+                  Web Apps
+                </span>
+
+                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 font-dm-mono text-[9px] uppercase tracking-[0.08em] text-slate-500 transition-all duration-300 group-hover:border-[#ffc400]/30 group-hover:bg-[#ffc400]/10 group-hover:text-[#0d2d5a]">
+                  Landing Pages
+                </span>
+              </div>
+
+              <div className="mt-7 font-dm-mono text-[10px] uppercase tracking-[0.12em] text-slate-400 transition-colors duration-300 group-hover:text-[#0d2d5a]">
+                View Web Projects →
               </div>
             </Link>
 
-            <div className="grid gap-5">
-              <Link
-                href="/websites"
-                className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-slate-300 hover:shadow-lg sm:p-8"
-              >
-                <div className="flex items-start justify-between">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-100 font-dm-mono text-sm text-[#071b36] transition-all duration-300 group-hover:bg-[#ffc400]">
-                    01
-                  </span>
+            <Link
+              href="/projects/software"
+              className="group relative border-b border-slate-200 px-5 py-8 transition-all duration-300 hover:bg-white sm:border-b-0 sm:border-r sm:px-7 sm:py-9 lg:px-8"
+            >
+              <div className="absolute left-0 top-0 h-0 w-0.5 bg-[#ffc400] transition-all duration-300 group-hover:h-full" />
 
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-50 text-[#071b36] transition-all duration-300 group-hover:bg-[#ffc400] group-hover:translate-x-1">
-                    ↗
-                  </span>
-                </div>
+              <div className="flex items-center justify-between">
+                <span className="font-dm-mono text-sm text-slate-300 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#ffc400]">
+                  ↗
+                </span>
+              </div>
 
-                <h3 className="font-hikasani mt-8 text-2xl font-bold text-[#071b36] sm:text-3xl">
-                  Websites
-                </h3>
-
-                <p className="mt-3 font-dm-sans text-sm leading-6 text-slate-500">
-                  Responsive digital experiences designed to represent brands,
-                  organizations and businesses online.
-                </p>
-
-                <div className="mt-6 font-dm-mono text-[10px] uppercase tracking-[0.12em] text-slate-400 transition-colors duration-300 group-hover:text-[#0d2d5a]">
-                  Explore Websites →
-                </div>
-              </Link>
-
-              <Link
-                href="/softwares"
-                className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-slate-300 hover:shadow-lg sm:p-8"
-              >
-                <div className="flex items-start justify-between">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#0d2d5a] font-dm-mono text-sm text-white transition-all duration-300 group-hover:bg-[#ffc400] group-hover:text-[#071b36]">
-                    02
-                  </span>
-
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-50 text-[#071b36] transition-all duration-300 group-hover:bg-[#ffc400] group-hover:translate-x-1">
-                    ↗
-                  </span>
-                </div>
-
-                <h3 className="font-hikasani mt-8 text-2xl font-bold text-[#071b36] sm:text-3xl">
-                  Software
-                </h3>
-
-                <p className="mt-3 font-dm-sans text-sm leading-6 text-slate-500">
-                  Purpose-built systems that help businesses organize, automate
-                  and improve the way they work.
-                </p>
-
-                <div className="mt-6 font-dm-mono text-[10px] uppercase tracking-[0.12em] text-slate-400 transition-colors duration-300 group-hover:text-[#0d2d5a]">
-                  Explore Software →
-                </div>
-              </Link>
-            </div>
-          </div>
-
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:mt-10 lg:grid-cols-3">
-            <div className="group rounded-3xl border border-slate-200 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-slate-300 hover:shadow-lg sm:p-7">
-              <span className="font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400 transition-colors duration-300 group-hover:text-[#0d2d5a]">
-                What matters
-              </span>
-
-              <h3 className="font-hikasani mt-3 text-xl font-bold text-[#071b36] sm:text-2xl">
-                Understand the problem
+              <h3 className="font-hikasani mt-8 text-2xl font-bold text-[#071b36] transition-colors duration-300 group-hover:text-[#0d2d5a] sm:text-3xl">
+                Software Projects
               </h3>
 
-              <p className="mt-2 font-dm-sans text-sm leading-6 text-slate-500">
-                Good solutions start by understanding what people actually need.
+              <p className="mt-3 max-w-sm font-dm-sans text-sm leading-6 text-slate-500">
+                Custom software and business systems designed to simplify,
+                automate and improve everyday operations.
               </p>
-            </div>
 
-            <div className="group rounded-3xl border border-slate-200 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-slate-300 hover:shadow-lg sm:p-7">
-              <span className="font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400 transition-colors duration-300 group-hover:text-[#0d2d5a]">
-                What matters
-              </span>
+              <div className="mt-7 flex flex-wrap gap-2">
+                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 font-dm-mono text-[9px] uppercase tracking-[0.08em] text-slate-500 transition-all duration-300 group-hover:border-[#ffc400]/30 group-hover:bg-[#ffc400]/10 group-hover:text-[#0d2d5a]">
+                  Management Systems
+                </span>
 
-              <h3 className="font-hikasani mt-3 text-xl font-bold text-[#071b36] sm:text-2xl">
-                Build with intention
+                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 font-dm-mono text-[9px] uppercase tracking-[0.08em] text-slate-500 transition-all duration-300 group-hover:border-[#ffc400]/30 group-hover:bg-[#ffc400]/10 group-hover:text-[#0d2d5a]">
+                  Admin Panels
+                </span>
+
+                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 font-dm-mono text-[9px] uppercase tracking-[0.08em] text-slate-500 transition-all duration-300 group-hover:border-[#ffc400]/30 group-hover:bg-[#ffc400]/10 group-hover:text-[#0d2d5a]">
+                  Automation
+                </span>
+              </div>
+
+              <div className="mt-7 font-dm-mono text-[10px] uppercase tracking-[0.12em] text-slate-400 transition-colors duration-300 group-hover:text-[#0d2d5a]">
+                View Software Projects →
+              </div>
+            </Link>
+
+            <Link
+              href="/projects/digital"
+              className="group relative px-5 py-8 transition-all duration-300 hover:bg-white sm:px-7 sm:py-9 lg:px-8"
+            >
+              <div className="absolute left-0 top-0 h-0 w-0.5 bg-[#ffc400] transition-all duration-300 group-hover:h-full" />
+
+              <div className="flex items-center justify-between">
+                <span className="font-dm-mono text-sm text-slate-300 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#ffc400]">
+                  ↗
+                </span>
+              </div>
+
+              <h3 className="font-hikasani mt-8 text-2xl font-bold text-[#071b36] transition-colors duration-300 group-hover:text-[#0d2d5a] sm:text-3xl">
+                Digital Products
               </h3>
 
-              <p className="mt-2 font-dm-sans text-sm leading-6 text-slate-500">
-                Every feature and decision should contribute to a useful
-                outcome.
+              <p className="mt-3 max-w-sm font-dm-sans text-sm leading-6 text-slate-500">
+                Applications, dashboards and digital tools created around
+                specific users, workflows and business needs.
               </p>
-            </div>
 
-            <div className="group rounded-3xl border border-slate-200 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-slate-300 hover:shadow-lg sm:col-span-2 lg:col-span-1 lg:p-7">
-              <span className="font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400 transition-colors duration-300 group-hover:text-[#0d2d5a]">
-                What matters
-              </span>
+              <div className="mt-7 flex flex-wrap gap-2">
+                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 font-dm-mono text-[9px] uppercase tracking-[0.08em] text-slate-500 transition-all duration-300 group-hover:border-[#ffc400]/30 group-hover:bg-[#ffc400]/10 group-hover:text-[#0d2d5a]">
+                  Dashboards
+                </span>
 
-              <h3 className="font-hikasani mt-3 text-xl font-bold text-[#071b36] sm:text-2xl">
-                Create lasting value
-              </h3>
+                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 font-dm-mono text-[9px] uppercase tracking-[0.08em] text-slate-500 transition-all duration-300 group-hover:border-[#ffc400]/30 group-hover:bg-[#ffc400]/10 group-hover:text-[#0d2d5a]">
+                  Platforms
+                </span>
 
-              <p className="mt-2 font-dm-sans text-sm leading-6 text-slate-500">
-                The goal is technology that remains useful beyond the launch.
-              </p>
-            </div>
+                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 font-dm-mono text-[9px] uppercase tracking-[0.08em] text-slate-500 transition-all duration-300 group-hover:border-[#ffc400]/30 group-hover:bg-[#ffc400]/10 group-hover:text-[#0d2d5a]">
+                  Custom Apps
+                </span>
+              </div>
+
+              <div className="mt-7 font-dm-mono text-[10px] uppercase tracking-[0.12em] text-slate-400 transition-colors duration-300 group-hover:text-[#0d2d5a]">
+                View Digital Projects →
+              </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -1368,10 +1083,6 @@ export default function HomePage() {
 
             <div className="grid gap-8 lg:grid-cols-4 lg:gap-5">
               <div className="group relative">
-                <div className="relative mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-slate-200 bg-white font-dm-mono text-sm text-[#071b36] shadow-sm transition-all duration-500 group-hover:border-[#ffc400] group-hover:bg-[#ffc400] group-hover:text-[#071b36] group-hover:shadow-[0_8px_25px_rgba(255,196,0,0.12)] lg:mx-0">
-                  <span>01</span>
-                </div>
-
                 <div className="mt-7 text-center lg:text-left">
                   <span className="font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400 transition-colors duration-300 group-hover:text-[#0d2d5a]">
                     Start
@@ -1389,10 +1100,6 @@ export default function HomePage() {
               </div>
 
               <div className="group relative">
-                <div className="relative mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-slate-200 bg-white font-dm-mono text-sm text-[#071b36] shadow-sm transition-all duration-500 group-hover:border-[#ffc400] group-hover:bg-[#ffc400] group-hover:text-[#071b36] group-hover:shadow-[0_8px_25px_rgba(255,196,0,0.12)] lg:mx-0">
-                  <span>02</span>
-                </div>
-
                 <div className="mt-7 text-center lg:text-left">
                   <span className="font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400 transition-colors duration-300 group-hover:text-[#0d2d5a]">
                     Plan
@@ -1410,10 +1117,6 @@ export default function HomePage() {
               </div>
 
               <div className="group relative">
-                <div className="relative mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-[#ffc400] bg-[#071b36] font-dm-mono text-sm text-white shadow-lg shadow-[#071b36]/10 transition-all duration-500 group-hover:bg-[#ffc400] group-hover:text-[#071b36] group-hover:shadow-[0_8px_25px_rgba(255,196,0,0.16)] lg:mx-0">
-                  <span>03</span>
-                </div>
-
                 <div className="mt-7 text-center lg:text-left">
                   <span className="font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#ffc400]/80 transition-colors duration-300 group-hover:text-[#0d2d5a]">
                     Create
@@ -1431,10 +1134,6 @@ export default function HomePage() {
               </div>
 
               <div className="group relative">
-                <div className="relative mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-slate-200 bg-white font-dm-mono text-sm text-[#071b36] shadow-sm transition-all duration-500 group-hover:border-[#ffc400] group-hover:bg-[#ffc400] group-hover:text-[#071b36] group-hover:shadow-[0_8px_25px_rgba(255,196,0,0.12)] lg:mx-0">
-                  <span>04</span>
-                </div>
-
                 <div className="mt-7 text-center lg:text-left">
                   <span className="font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400 transition-colors duration-300 group-hover:text-[#0d2d5a]">
                     Result
@@ -1450,38 +1149,6 @@ export default function HomePage() {
                   </p>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div className="group relative mt-14 overflow-hidden rounded-3xl border border-slate-200 bg-[#f8fafc] p-6 transition-all duration-500 hover:border-slate-300 hover:shadow-lg sm:mt-16 sm:p-8 lg:mt-20 lg:p-10">
-            <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#ffc400]/[0.04] blur-3xl transition-transform duration-1000 group-hover:scale-125" />
-
-            <div className="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-              <div className="max-w-2xl">
-                <span className="font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400">
-                  One approach
-                </span>
-
-                <h3 className="font-hikasani mt-3 text-2xl font-bold leading-tight text-[#071b36] sm:text-3xl">
-                  Understand first. Build better.
-                </h3>
-
-                <p className="mt-3 font-dm-sans text-sm leading-6 text-slate-500 sm:text-base">
-                  We do not believe in unnecessary complexity. The process
-                  should make the work clearer, not harder.
-                </p>
-              </div>
-
-              <Link
-                href="/contact"
-                className="group relative mt-3 inline-flex min-h-12 w-fit shrink-0 items-center gap-4 rounded-2xl bg-[#071b36] px-4 font-dm-sans text-base font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0d2d5a] hover:shadow-lg hover:shadow-[#071b36]/10"
-              >
-                <span>Start With Us</span>
-
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#ffc400] text-[#071b36] transition-transform duration-300 group-hover:translate-x-1">
-                  ↗
-                </span>
-              </Link>
             </div>
           </div>
         </div>
@@ -1529,10 +1196,6 @@ export default function HomePage() {
                 <span className="font-dm-mono text-sm tracking-[0.18em] text-[#0d2d5a] transition-colors duration-300 group-hover:text-[#ffc400]">
                   ★★★★★
                 </span>
-
-                <span className="font-dm-mono text-[10px] text-slate-300">
-                  01
-                </span>
               </div>
 
               <p className="mt-7 font-dm-sans text-sm leading-7 text-slate-600 sm:text-base">
@@ -1565,10 +1228,6 @@ export default function HomePage() {
                 <span className="font-dm-mono text-sm tracking-[0.18em] text-[#ffc400]">
                   ★★★★★
                 </span>
-
-                <span className="font-dm-mono text-[10px] text-white/20">
-                  02
-                </span>
               </div>
 
               <p className="relative mt-7 font-dm-sans text-sm leading-7 text-slate-300 sm:text-base">
@@ -1597,10 +1256,6 @@ export default function HomePage() {
                 <span className="font-dm-mono text-sm tracking-[0.18em] text-[#0d2d5a] transition-colors duration-300 group-hover:text-[#ffc400]">
                   ★★★★★
                 </span>
-
-                <span className="font-dm-mono text-[10px] text-slate-300">
-                  03
-                </span>
               </div>
 
               <p className="mt-7 font-dm-sans text-sm leading-7 text-slate-600 sm:text-base">
@@ -1622,39 +1277,6 @@ export default function HomePage() {
                   <p className="font-dm-sans text-xs text-slate-400">Student</p>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div className="group relative mt-8 overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 transition-all duration-500 hover:border-slate-300 hover:shadow-lg sm:mt-10 sm:p-8 lg:p-10">
-            <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#ffc400]/[0.04] blur-3xl transition-transform duration-1000 group-hover:scale-125" />
-
-            <div className="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-              <div className="max-w-2xl">
-                <span className="font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400">
-                  Built on trust
-                </span>
-
-                <h3 className="font-hikasani mt-3 text-2xl font-bold leading-tight text-[#071b36] sm:text-3xl">
-                  Your goals come first.
-                </h3>
-
-                <p className="mt-3 font-dm-sans text-sm leading-6 text-slate-500 sm:text-base">
-                  Whether you are starting from zero, improving your skills or
-                  bringing a business idea to life, we focus on understanding
-                  what success means for you.
-                </p>
-              </div>
-
-              <Link
-                href="/contact"
-                className="group relative mt-3 inline-flex min-h-12 w-fit shrink-0 items-center gap-4 rounded-2xl bg-[#071b36] px-4 font-dm-sans text-base font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0d2d5a] hover:shadow-lg hover:shadow-[#071b36]/10"
-              >
-                <span>Talk To Us</span>
-
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#ffc400] text-[#071b36] transition-transform duration-300 group-hover:translate-x-1">
-                  ↗
-                </span>
-              </Link>
             </div>
           </div>
         </div>
@@ -1717,86 +1339,6 @@ export default function HomePage() {
                 <span>Explore Courses</span>
               </Link>
             </div>
-          </div>
-
-          <div className="mt-14 grid gap-4 border-t border-white/10 pt-10 sm:mt-16 sm:grid-cols-3 lg:mt-20">
-            <Link
-              href="/services"
-              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 transition-all duration-500 hover:-translate-y-1 hover:border-[#ffc400]/20 hover:bg-white/[0.07] hover:shadow-xl hover:shadow-black/10 sm:p-7"
-            >
-              <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#ffc400]/[0.04] blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-              <div className="relative flex items-center justify-between">
-                <span className="font-dm-mono text-[10px] uppercase tracking-[0.14em] text-[#ffc400]/70">
-                  For Businesses
-                </span>
-
-                <span className="transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#ffc400]">
-                  ↗
-                </span>
-              </div>
-
-              <h3 className="font-hikasani relative mt-5 text-xl font-bold text-white sm:text-2xl">
-                Need a digital solution?
-              </h3>
-
-              <p className="relative mt-2 font-dm-sans text-sm leading-6 text-slate-400">
-                Let’s discuss your requirements and find the right technology
-                solution.
-              </p>
-            </Link>
-
-            <Link
-              href="/courses"
-              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 transition-all duration-500 hover:-translate-y-1 hover:border-[#ffc400]/20 hover:bg-white/[0.07] hover:shadow-xl hover:shadow-black/10 sm:p-7"
-            >
-              <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#ffc400]/[0.04] blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-              <div className="relative flex items-center justify-between">
-                <span className="font-dm-mono text-[10px] uppercase tracking-[0.14em] text-[#ffc400]/70">
-                  For Learners
-                </span>
-
-                <span className="transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#ffc400]">
-                  ↗
-                </span>
-              </div>
-
-              <h3 className="font-hikasani relative mt-5 text-xl font-bold text-white sm:text-2xl">
-                Ready to learn?
-              </h3>
-
-              <p className="relative mt-2 font-dm-sans text-sm leading-6 text-slate-400">
-                Explore practical courses designed around useful skills and real
-                application.
-              </p>
-            </Link>
-
-            <Link
-              href="/about"
-              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 transition-all duration-500 hover:-translate-y-1 hover:border-[#ffc400]/20 hover:bg-white/[0.07] hover:shadow-xl hover:shadow-black/10 sm:p-7"
-            >
-              <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#ffc400]/[0.04] blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-              <div className="relative flex items-center justify-between">
-                <span className="font-dm-mono text-[10px] uppercase tracking-[0.14em] text-[#ffc400]/70">
-                  Get To Know Us
-                </span>
-
-                <span className="transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#ffc400]">
-                  ↗
-                </span>
-              </div>
-
-              <h3 className="font-hikasani relative mt-5 text-xl font-bold text-white sm:text-2xl">
-                Want to know more?
-              </h3>
-
-              <p className="relative mt-2 font-dm-sans text-sm leading-6 text-slate-400">
-                Discover who we are, what we believe and why we built Tech
-                Learning Hub.
-              </p>
-            </Link>
           </div>
         </div>
       </section>
