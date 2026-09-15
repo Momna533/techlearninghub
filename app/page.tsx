@@ -3,8 +3,9 @@
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Hero from "@/app/components/home/Hero";
+import Services from "@/app/components/home/Services";
 
 const navigation = [
   { label: "Home", href: "/" },
@@ -193,6 +194,8 @@ export default function HomePage() {
       )}
 
       <Hero />
+
+      <Services />
 
       <section className="relative overflow-hidden bg-[#f8fafc] py-20 sm:py-24 lg:py-28">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">

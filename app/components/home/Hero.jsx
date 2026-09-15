@@ -105,6 +105,14 @@ export default function Hero() {
 
   const slide = slides[activeSlide];
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide((current) => (current + 1) % slides.length);
+    }, 7000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const nextSlide = () => {
     setActiveSlide((current) => (current + 1) % slides.length);
   };
@@ -115,34 +123,31 @@ export default function Hero() {
     );
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 7000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section
       id="hero"
-      className={`${dmMono.variable} ${dmSans.variable} relative min-h-[760px] overflow-hidden bg-[#071b36] text-white lg:min-h-[850px]`}
+      className={`${dmMono.variable} ${dmSans.variable} hero-section relative min-h-[760px] overflow-hidden bg-[#071b36] text-white lg:min-h-[850px]`}
     >
+      {/* Main background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_45%,rgba(24,119,242,0.14),transparent_32%),linear-gradient(115deg,#071b36_0%,#092344_52%,#0a284b_100%)]" />
 
+      {/* Ambient background glow */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-blue-500/[0.06] blur-3xl" />
         <div className="absolute right-[-12rem] top-[-8rem] h-[34rem] w-[34rem] rounded-full bg-[#ffc400]/[0.025] blur-3xl" />
         <div className="absolute bottom-[-15rem] left-[35%] h-[30rem] w-[30rem] rounded-full bg-blue-400/[0.04] blur-3xl" />
       </div>
 
+      {/* Subtle grid */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.025] [background-image:linear-gradient(rgba(255,255,255,.8)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.8)_1px,transparent_1px)] [background-size:70px_70px]" />
 
+      {/* Hero content */}
       <div className="relative mx-auto flex min-h-[760px] max-w-[1500px] flex-col justify-center px-5 py-20 sm:px-8 lg:min-h-[850px] lg:px-12 xl:px-16">
         <div className="grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 xl:gap-16">
+          {/* Content */}
           <div
             key={`content-${activeSlide}`}
-            className="relative z-10 max-w-3xl animate-[heroFade_700ms_ease-out]"
+            className="relative z-10 max-w-3xl animate-[heroContent_650ms_cubic-bezier(0.22,1,0.36,1)]"
           >
             <div className="mb-7 flex flex-wrap items-center gap-3">
               <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.045] px-4 py-2 backdrop-blur-sm">
@@ -215,6 +220,7 @@ export default function Hero() {
                   <p className="font-[var(--font-dm-sans)] text-sm font-semibold text-white">
                     {slide.statLabel}
                   </p>
+
                   <p className="mt-0.5 font-[var(--font-dm-mono)] text-[10px] uppercase tracking-[0.08em] text-white/35">
                     Built with purpose
                   </p>
@@ -227,6 +233,7 @@ export default function Hero() {
                 <p className="font-[var(--font-dm-mono)] text-[10px] uppercase tracking-[0.14em] text-white/35">
                   Our approach
                 </p>
+
                 <p className="mt-1 font-[var(--font-dm-sans)] text-sm text-white/65">
                   Strategy · Design · Development · Support
                 </p>
@@ -234,9 +241,10 @@ export default function Hero() {
             </div>
           </div>
 
+          {/* Visual */}
           <div
             key={`visual-${activeSlide}`}
-            className="relative z-10 hidden min-h-[390px] items-center justify-center animate-[heroVisual_900ms_ease-out] lg:flex lg:min-h-[600px]"
+            className="relative z-10 hidden min-h-[390px] items-center justify-center animate-[heroVisual_850ms_cubic-bezier(0.22,1,0.36,1)] lg:flex lg:min-h-[600px]"
           >
             <div className="absolute right-[8%] top-[5%] hidden rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 backdrop-blur-md sm:block">
               <span className="font-[var(--font-dm-mono)] text-[10px] uppercase tracking-[0.13em] text-white/50">
@@ -267,25 +275,27 @@ export default function Hero() {
               <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-2 shadow-[0_30px_100px_rgba(0,0,0,0.35)] backdrop-blur-sm">
                 <div className="relative aspect-[1.18/1] overflow-hidden rounded-xl bg-[#0b2342]">
                   <Image
-                    preload
+                    preload={activeSlide === 0}
                     src={slide.image}
                     alt={`${slide.title} ${slide.highlight}`}
                     fill
-                    sizes="(max-width: 768px) 92vw, (max-width: 1280px) 52vw, 650px"
-                    className="object-cover object-center transition-transform duration-[1500ms] ease-out hover:scale-[1.025]"
+                    sizes="(max-width: 1024px) 92vw, (max-width: 1280px) 52vw, 650px"
+                    className="object-cover object-center"
                   />
 
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#071b36]/30 via-transparent to-transparent" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#071b36]/10 via-transparent to-transparent" />
                 </div>
               </div>
 
               <div className="absolute -right-3 top-[18%] hidden rounded-xl border border-white/10 bg-[#071b36]/80 p-4 shadow-2xl backdrop-blur-xl sm:block lg:-right-8">
                 <div className="flex items-center gap-3">
                   <div className="h-2.5 w-2.5 rounded-full bg-[#ffc400] shadow-[0_0_14px_rgba(255,196,0,0.7)]" />
+
                   <div>
                     <p className="font-[var(--font-dm-mono)] text-[9px] uppercase tracking-[0.12em] text-white/35">
                       Project status
                     </p>
+
                     <p className="mt-1 font-[var(--font-dm-sans)] text-xs font-semibold text-white">
                       Building for growth
                     </p>
@@ -309,6 +319,7 @@ export default function Hero() {
           </div>
         </div>
 
+        {/* Controls */}
         <div className="relative z-20 mt-10 flex items-center justify-between border-t border-white/10 pt-5 lg:mt-4">
           <div className="flex items-center gap-2">
             {slides.map((item, index) => (
@@ -316,6 +327,7 @@ export default function Hero() {
                 key={item.eyebrow}
                 type="button"
                 aria-label={`Go to slide ${index + 1}`}
+                aria-current={activeSlide === index ? "true" : undefined}
                 onClick={() => setActiveSlide(index)}
                 className={`h-1.5 rounded-full transition-all duration-500 ${
                   activeSlide === index
@@ -349,32 +361,52 @@ export default function Hero() {
       </div>
 
       <style jsx global>{`
-        @keyframes heroFade {
+        /* Entire hero enters once when the page loads */
+        @keyframes heroSectionEnter {
           from {
             opacity: 0;
-            transform: translateY(18px);
+            transform: translateY(12px);
           }
+
           to {
             opacity: 1;
             transform: translateY(0);
           }
         }
 
-        @keyframes heroVisual {
+        /* Content transition when the slide changes */
+        @keyframes heroContent {
           from {
             opacity: 0;
-            transform: translateX(30px) scale(0.97);
+            transform: translateY(10px);
           }
+
           to {
             opacity: 1;
-            transform: translateX(0) scale(1);
+            transform: translateY(0);
           }
         }
 
+        /* Image/visual transition when the slide changes */
+        @keyframes heroVisual {
+          from {
+            opacity: 0;
+            transform: translateY(14px) scale(0.985);
+          }
+
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        .hero-section {
+          animation: heroSectionEnter 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
         @media (prefers-reduced-motion: reduce) {
-          *,
-          *::before,
-          *::after {
+          .hero-section,
+          .hero-section * {
             animation-duration: 0.01ms !important;
             animation-iteration-count: 1 !important;
             transition-duration: 0.01ms !important;
