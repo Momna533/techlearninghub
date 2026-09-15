@@ -24,3 +24,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.font-hikasani {
+  font-family: "Hikasani Sans Serif", sans-serif;
+}
+
+.font-dm-mono {
+  font-family: var(--font-dm-mono), monospace;
+}
+
+.font-dm-sans {
+  font-family: var(--font-dm-sans), sans-serif;
+}
