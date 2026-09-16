@@ -31,9 +31,9 @@ const testimonials = [
 const cardReveal = {
   hidden: {
     opacity: 0,
-    y: 60,
-    scale: 0.94,
-    filter: "blur(8px)",
+    y: 45,
+    scale: 0.97,
+    filter: "blur(5px)",
   },
   visible: (index) => ({
     opacity: 1,
@@ -41,8 +41,8 @@ const cardReveal = {
     scale: 1,
     filter: "blur(0px)",
     transition: {
-      duration: 0.85,
-      delay: index * 0.12,
+      duration: 0.8,
+      delay: index * 0.1,
       ease,
     },
   }),
@@ -57,33 +57,33 @@ export default function Testimonials() {
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <motion.div
           animate={{
-            x: [0, 30, -15, 0],
-            y: [0, -20, 15, 0],
-            scale: [1, 1.06, 0.97, 1],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute -right-40 top-10 h-80 w-80 rounded-full bg-blue-100/40 blur-3xl"
-        />
-
-        <motion.div
-          animate={{
-            x: [0, -25, 15, 0],
-            y: [0, 18, -15, 0],
-            scale: [1, 0.97, 1.05, 1],
+            x: [0, 25, -12, 0],
+            y: [0, -16, 12, 0],
+            scale: [1, 1.05, 0.98, 1],
           }}
           transition={{
             duration: 20,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute -left-40 bottom-0 h-72 w-72 rounded-full bg-[#ffc400]/[0.04] blur-3xl"
+          className="absolute -right-40 top-10 h-80 w-80 rounded-full bg-blue-100/35 blur-3xl"
         />
 
-        <div className="absolute inset-0 opacity-[0.018] [background-image:linear-gradient(#071b36_1px,transparent_1px),linear-gradient(90deg,#071b36_1px,transparent_1px)] [background-size:72px_72px]" />
+        <motion.div
+          animate={{
+            x: [0, -20, 12, 0],
+            y: [0, 15, -12, 0],
+            scale: [1, 0.98, 1.04, 1],
+          }}
+          transition={{
+            duration: 22,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute -left-40 bottom-0 h-72 w-72 rounded-full bg-[#ffc400]/[0.035] blur-3xl"
+        />
+
+        <div className="absolute inset-0 opacity-[0.014] [background-image:linear-gradient(#071b36_1px,transparent_1px),linear-gradient(90deg,#071b36_1px,transparent_1px)] [background-size:72px_72px]" />
 
         <motion.div
           initial={{
@@ -94,10 +94,10 @@ export default function Testimonials() {
           }}
           viewport={{ once: true }}
           transition={{
-            duration: 1.1,
+            duration: 1,
             ease,
           }}
-          className="absolute left-0 right-0 top-0 h-px origin-left bg-[#071b36]/[0.07]"
+          className="absolute left-0 right-0 top-0 h-px origin-left bg-[#071b36]/[0.06]"
         />
       </div>
 
@@ -105,9 +105,9 @@ export default function Testimonials() {
         <motion.div
           initial={{
             opacity: 0,
-            y: 50,
-            scale: 0.96,
-            filter: "blur(10px)",
+            y: 35,
+            scale: 0.98,
+            filter: "blur(6px)",
           }}
           whileInView={{
             opacity: 1,
@@ -117,7 +117,7 @@ export default function Testimonials() {
           }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{
-            duration: 0.95,
+            duration: 0.85,
             ease,
           }}
           className="mx-auto max-w-3xl text-center"
@@ -125,7 +125,7 @@ export default function Testimonials() {
           <motion.div
             initial={{
               opacity: 0,
-              y: 12,
+              y: 10,
             }}
             whileInView={{
               opacity: 1,
@@ -133,8 +133,8 @@ export default function Testimonials() {
             }}
             viewport={{ once: true }}
             transition={{
-              duration: 0.65,
-              delay: 0.15,
+              duration: 0.6,
+              delay: 0.12,
               ease,
             }}
             className="mb-5 inline-flex items-center gap-3"
@@ -150,8 +150,8 @@ export default function Testimonials() {
               }}
               viewport={{ once: true }}
               transition={{
-                duration: 0.5,
-                delay: 0.25,
+                duration: 0.45,
+                delay: 0.22,
                 ease,
               }}
               className="h-1.5 w-1.5 rounded-full bg-[#ffc400]"
@@ -172,8 +172,8 @@ export default function Testimonials() {
               }}
               viewport={{ once: true }}
               transition={{
-                duration: 0.6,
-                delay: 0.35,
+                duration: 0.55,
+                delay: 0.32,
                 ease,
               }}
               className="h-px w-7 origin-left bg-[#ffc400]"
@@ -183,9 +183,9 @@ export default function Testimonials() {
           <motion.h2
             initial={{
               opacity: 0,
-              y: 30,
-              scale: 0.95,
-              filter: "blur(8px)",
+              y: 24,
+              scale: 0.98,
+              filter: "blur(5px)",
             }}
             whileInView={{
               opacity: 1,
@@ -195,8 +195,8 @@ export default function Testimonials() {
             }}
             viewport={{ once: true }}
             transition={{
-              duration: 1,
-              delay: 0.25,
+              duration: 0.85,
+              delay: 0.22,
               ease,
             }}
             className="font-hikasani text-3xl font-bold leading-[1.05] tracking-[-0.035em] text-[#071b36] sm:text-4xl md:text-5xl lg:text-6xl"
@@ -216,8 +216,8 @@ export default function Testimonials() {
                 }}
                 viewport={{ once: true }}
                 transition={{
-                  duration: 0.55,
-                  delay: 0.65,
+                  duration: 0.5,
+                  delay: 0.58,
                   ease,
                 }}
                 className="mb-1.5 h-2.5 w-2.5 rounded-full bg-[#ffc400] sm:h-3 sm:w-3"
@@ -229,7 +229,7 @@ export default function Testimonials() {
           <motion.p
             initial={{
               opacity: 0,
-              y: 18,
+              y: 14,
             }}
             whileInView={{
               opacity: 1,
@@ -237,8 +237,8 @@ export default function Testimonials() {
             }}
             viewport={{ once: true }}
             transition={{
-              duration: 0.75,
-              delay: 0.65,
+              duration: 0.7,
+              delay: 0.55,
               ease,
             }}
             className="mx-auto mt-5 max-w-2xl font-dm-sans text-sm leading-6 text-slate-500 sm:mt-6 sm:text-base sm:leading-7"
@@ -261,17 +261,17 @@ export default function Testimonials() {
             >
               <motion.div
                 whileHover={{
-                  y: -9,
-                  scale: 1.012,
+                  y: -7,
+                  scale: 1.008,
                   transition: {
-                    duration: 0.35,
+                    duration: 0.4,
                     ease,
                   },
                 }}
                 className={`group relative h-full overflow-hidden rounded-3xl p-6 transition-all duration-500 sm:p-8 ${
                   testimonial.featured
-                    ? "bg-[#071b36] text-white shadow-xl shadow-slate-300/30 hover:shadow-2xl hover:shadow-[#071b36]/15"
-                    : "border border-slate-200 bg-white shadow-sm hover:border-slate-300 hover:shadow-lg"
+                    ? "bg-[#071b36] text-white shadow-[0_20px_60px_rgba(7,27,54,0.16)] hover:shadow-[0_28px_75px_rgba(7,27,54,0.2)]"
+                    : "border border-slate-200/80 bg-white shadow-[0_12px_35px_rgba(7,27,54,0.04)] hover:border-slate-300 hover:shadow-[0_22px_55px_rgba(7,27,54,0.09)]"
                 }`}
               >
                 <motion.div
@@ -285,15 +285,11 @@ export default function Testimonials() {
                   }}
                   viewport={{ once: true }}
                   transition={{
-                    duration: 1.4,
-                    delay: 0.45 + index * 0.12,
+                    duration: 1.35,
+                    delay: 0.4 + index * 0.12,
                     ease: "easeInOut",
                   }}
-                  className={`pointer-events-none absolute inset-y-0 left-0 z-20 w-1/3 skew-x-[-18deg] bg-gradient-to-r from-transparent to-transparent ${
-                    testimonial.featured
-                      ? "via-[#ffc400]/10"
-                      : "via-[#ffc400]/10"
-                  }`}
+                  className="pointer-events-none absolute inset-y-0 left-0 z-20 w-1/3 skew-x-[-18deg] bg-gradient-to-r from-transparent via-[#ffc400]/10 to-transparent"
                 />
 
                 {testimonial.featured && (
@@ -307,8 +303,8 @@ export default function Testimonials() {
                       }}
                       viewport={{ once: true }}
                       transition={{
-                        duration: 0.8,
-                        delay: 0.4,
+                        duration: 0.7,
+                        delay: 0.35,
                         ease,
                       }}
                       className="absolute left-0 top-8 h-16 w-0.5 origin-top bg-[#ffc400]"
@@ -325,8 +321,8 @@ export default function Testimonials() {
                       }}
                       viewport={{ once: true }}
                       transition={{
-                        duration: 0.9,
-                        delay: 0.65,
+                        duration: 0.8,
+                        delay: 0.6,
                         ease,
                       }}
                       className="absolute bottom-0 left-0 h-px w-full origin-left bg-gradient-to-r from-transparent via-[#ffc400]/30 to-transparent"
@@ -338,7 +334,7 @@ export default function Testimonials() {
                   <motion.span
                     initial={{
                       opacity: 0,
-                      y: 8,
+                      y: 6,
                     }}
                     whileInView={{
                       opacity: 1,
@@ -346,8 +342,8 @@ export default function Testimonials() {
                     }}
                     viewport={{ once: true }}
                     transition={{
-                      duration: 0.55,
-                      delay: 0.25 + index * 0.12,
+                      duration: 0.5,
+                      delay: 0.22 + index * 0.1,
                       ease,
                     }}
                     className={`font-dm-mono text-sm tracking-[0.18em] transition-colors duration-300 ${
@@ -363,8 +359,8 @@ export default function Testimonials() {
                 <motion.p
                   initial={{
                     opacity: 0,
-                    y: 18,
-                    filter: "blur(4px)",
+                    y: 14,
+                    filter: "blur(3px)",
                   }}
                   whileInView={{
                     opacity: 1,
@@ -373,8 +369,8 @@ export default function Testimonials() {
                   }}
                   viewport={{ once: true }}
                   transition={{
-                    duration: 0.75,
-                    delay: 0.4 + index * 0.12,
+                    duration: 0.7,
+                    delay: 0.35 + index * 0.1,
                     ease,
                   }}
                   className={`relative z-10 mt-7 font-dm-sans text-sm leading-7 sm:text-base ${
@@ -393,8 +389,8 @@ export default function Testimonials() {
                   }}
                   viewport={{ once: true }}
                   transition={{
-                    duration: 0.8,
-                    delay: 0.58 + index * 0.12,
+                    duration: 0.75,
+                    delay: 0.52 + index * 0.1,
                     ease,
                   }}
                   className={`relative z-10 mt-8 flex origin-left items-center gap-3 border-t pt-6 ${
@@ -405,8 +401,8 @@ export default function Testimonials() {
                 >
                   <motion.div
                     whileHover={{
-                      scale: 1.1,
-                      rotate: testimonial.featured ? -6 : 6,
+                      scale: 1.08,
+                      rotate: testimonial.featured ? -5 : 5,
                     }}
                     transition={{
                       duration: 0.3,

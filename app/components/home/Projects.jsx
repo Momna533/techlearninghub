@@ -47,8 +47,8 @@ const ease = [0.22, 1, 0.36, 1];
 const reveal = {
   hidden: {
     opacity: 0,
-    y: 35,
-    filter: "blur(7px)",
+    y: 28,
+    filter: "blur(5px)",
   },
   visible: {
     opacity: 1,
@@ -64,20 +64,18 @@ const reveal = {
 const cardReveal = {
   hidden: {
     opacity: 0,
-    y: 60,
-    scale: 0.94,
-    rotateX: 10,
-    filter: "blur(8px)",
+    y: 45,
+    scale: 0.97,
+    filter: "blur(5px)",
   },
   visible: (index) => ({
     opacity: 1,
     y: 0,
     scale: 1,
-    rotateX: 0,
     filter: "blur(0px)",
     transition: {
-      duration: 0.85,
-      delay: index * 0.12,
+      duration: 0.8,
+      delay: index * 0.1,
       ease,
     },
   }),
@@ -91,23 +89,10 @@ export default function WorkSection() {
     >
       <div className="pointer-events-none absolute inset-0">
         <motion.div
-          className="absolute -left-48 top-10 h-[30rem] w-[30rem] rounded-full bg-blue-100/60 blur-3xl"
+          className="absolute -left-48 top-10 h-[30rem] w-[30rem] rounded-full bg-blue-100/50 blur-3xl"
           animate={{
-            x: [0, 35, 0],
-            y: [0, -20, 0],
-          }}
-          transition={{
-            duration: 16,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-
-        <motion.div
-          className="absolute -right-48 bottom-[-8rem] h-[28rem] w-[28rem] rounded-full bg-[#FFC400]/[0.035] blur-3xl"
-          animate={{
-            x: [0, -25, 0],
-            y: [0, 20, 0],
+            x: [0, 30, 0],
+            y: [0, -15, 0],
           }}
           transition={{
             duration: 18,
@@ -116,17 +101,30 @@ export default function WorkSection() {
           }}
         />
 
-        <div className="absolute inset-0 opacity-[0.018] [background-image:linear-gradient(#071B36_1px,transparent_1px),linear-gradient(90deg,#071B36_1px,transparent_1px)] [background-size:72px_72px]" />
+        <motion.div
+          className="absolute -right-48 bottom-[-8rem] h-[28rem] w-[28rem] rounded-full bg-[#FFC400]/[0.03] blur-3xl"
+          animate={{
+            x: [0, -20, 0],
+            y: [0, 15, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        <div className="absolute inset-0 opacity-[0.014] [background-image:linear-gradient(#071B36_1px,transparent_1px),linear-gradient(90deg,#071B36_1px,transparent_1px)] [background-size:72px_72px]" />
 
         <motion.div
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{
-            duration: 1.1,
+            duration: 1,
             ease,
           }}
-          className="absolute left-0 right-0 top-0 h-px origin-left bg-[#071B36]/[0.08]"
+          className="absolute left-0 right-0 top-0 h-px origin-left bg-[#071B36]/[0.07]"
         />
 
         <motion.div
@@ -134,11 +132,11 @@ export default function WorkSection() {
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{
-            duration: 1.1,
-            delay: 0.15,
+            duration: 1,
+            delay: 0.1,
             ease,
           }}
-          className="absolute bottom-0 left-0 right-0 h-px origin-right bg-[#071B36]/[0.06]"
+          className="absolute bottom-0 left-0 right-0 h-px origin-right bg-[#071B36]/[0.05]"
         />
       </div>
 
@@ -175,8 +173,8 @@ export default function WorkSection() {
             aria-label="Project categories"
             initial={{
               opacity: 0,
-              x: 30,
-              filter: "blur(7px)",
+              x: 25,
+              filter: "blur(5px)",
             }}
             whileInView={{
               opacity: 1,
@@ -189,14 +187,14 @@ export default function WorkSection() {
               delay: 0.15,
               ease,
             }}
-            className="flex max-w-full flex-wrap items-center gap-x-5 gap-y-3 border-b border-slate-200 pb-2"
+            className="flex max-w-full flex-wrap items-center gap-x-5 gap-y-3 border-b border-slate-200/80 pb-2"
           >
             {filters.map((filter, index) => (
               <motion.div
                 key={filter.label}
                 initial={{
                   opacity: 0,
-                  y: 10,
+                  y: 8,
                 }}
                 whileInView={{
                   opacity: 1,
@@ -246,21 +244,22 @@ export default function WorkSection() {
             >
               <motion.div
                 whileHover={{
-                  y: -9,
+                  y: -7,
                   transition: {
-                    duration: 0.35,
+                    duration: 0.4,
                     ease,
                   },
                 }}
               >
                 <Link href={project.href} className="group block">
                   <motion.div
-                    className="relative mb-6 aspect-[1.35/1] overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_14px_40px_rgba(7,27,54,0.045)]"
+                    className="relative mb-6 aspect-[1.35/1] overflow-hidden rounded-2xl border border-slate-200/70 bg-white shadow-[0_12px_35px_rgba(7,27,54,0.045)]"
                     whileHover={{
-                      boxShadow: "0 28px 70px rgba(7,27,54,0.13)",
+                      boxShadow:
+                        "0 30px 75px rgba(7,27,54,0.12), 0 8px 24px rgba(7,27,54,0.05)",
                     }}
                     transition={{
-                      duration: 0.4,
+                      duration: 0.45,
                       ease,
                     }}
                   >
@@ -275,18 +274,18 @@ export default function WorkSection() {
                       }}
                       viewport={{ once: true, amount: 0.2 }}
                       transition={{
-                        duration: 1.4,
+                        duration: 1.35,
                         delay: 0.3 + index * 0.12,
                         ease: "easeInOut",
                       }}
-                      className="pointer-events-none absolute inset-y-0 left-0 z-20 w-1/3 skew-x-[-18deg] bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                      className="pointer-events-none absolute inset-y-0 left-0 z-20 w-1/3 skew-x-[-18deg] bg-gradient-to-r from-transparent via-white/25 to-transparent"
                     />
 
                     <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-[#0B1830]/15 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
                     <motion.div
                       initial={{
-                        scale: 1.08,
+                        scale: 1.06,
                         opacity: 0,
                       }}
                       whileInView={{
@@ -295,7 +294,7 @@ export default function WorkSection() {
                       }}
                       viewport={{ once: true, amount: 0.15 }}
                       transition={{
-                        duration: 1,
+                        duration: 0.9,
                         delay: 0.1 + index * 0.1,
                         ease,
                       }}
@@ -307,11 +306,11 @@ export default function WorkSection() {
                         loading="eager"
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.07]"
+                        className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.055]"
                       />
                     </motion.div>
 
-                    <div className="pointer-events-none absolute right-5 top-5 z-20 flex h-8 w-8 items-center justify-center rounded-full border border-white/40 bg-black/5 text-white opacity-0 backdrop-blur-sm transition-all duration-400 group-hover:opacity-100">
+                    <div className="pointer-events-none absolute right-5 top-5 z-20 flex h-8 w-8 items-center justify-center rounded-full border border-white/35 bg-black/5 text-white opacity-0 backdrop-blur-sm transition-all duration-400 group-hover:opacity-100">
                       <span className="text-sm">↗</span>
                     </div>
                   </motion.div>
@@ -333,7 +332,7 @@ export default function WorkSection() {
                     <motion.h3
                       initial={{
                         opacity: 0,
-                        y: 12,
+                        y: 10,
                       }}
                       whileInView={{
                         opacity: 1,
@@ -353,7 +352,7 @@ export default function WorkSection() {
                     <motion.p
                       initial={{
                         opacity: 0,
-                        y: 12,
+                        y: 10,
                       }}
                       whileInView={{
                         opacity: 1,
@@ -373,7 +372,7 @@ export default function WorkSection() {
                     <motion.span
                       initial={{
                         opacity: 0,
-                        x: -10,
+                        x: -8,
                       }}
                       whileInView={{
                         opacity: 1,

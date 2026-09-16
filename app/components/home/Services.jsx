@@ -292,7 +292,7 @@ const ease = [0.22, 1, 0.36, 1];
 const reveal = {
   hidden: {
     opacity: 0,
-    y: 24,
+    y: 22,
   },
   visible: {
     opacity: 1,
@@ -342,29 +342,31 @@ export default function Services() {
       <div className="pointer-events-none absolute inset-0">
         <motion.div
           animate={{
-            x: [0, 30, 0],
-            y: [0, -18, 0],
-          }}
-          transition={{
-            duration: 16,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute right-[-12rem] top-10 h-[28rem] w-[28rem] rounded-full bg-blue-100/35 blur-3xl"
-        />
-
-        <motion.div
-          animate={{
-            x: [0, -25, 0],
-            y: [0, 20, 0],
+            x: [0, 25, 0],
+            y: [0, -15, 0],
           }}
           transition={{
             duration: 18,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute bottom-[-12rem] left-[-10rem] h-[28rem] w-[28rem] rounded-full bg-[#FFC400]/[0.025] blur-3xl"
+          className="absolute right-[-14rem] top-[-6rem] h-[30rem] w-[30rem] rounded-full bg-blue-100/30 blur-[110px]"
         />
+
+        <motion.div
+          animate={{
+            x: [0, -20, 0],
+            y: [0, 18, 0],
+          }}
+          transition={{
+            duration: 22,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute bottom-[-14rem] left-[-12rem] h-[30rem] w-[30rem] rounded-full bg-[#FFC400]/[0.025] blur-[110px]"
+        />
+
+        <div className="absolute inset-x-0 top-0 h-px bg-slate-200/70" />
       </div>
 
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10">
@@ -376,7 +378,7 @@ export default function Services() {
             hidden: {},
             visible: {
               transition: {
-                staggerChildren: 0.08,
+                staggerChildren: 0.09,
               },
             },
           }}
@@ -387,21 +389,21 @@ export default function Services() {
               variants={reveal}
               className="mb-4 flex items-center gap-3"
             >
-              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#FFC400]" />
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#FFC400] shadow-[0_0_10px_rgba(255,196,0,0.35)]" />
 
-              <span className="font-[var(--font-dm-mono)] text-[9px] font-medium uppercase tracking-[0.16em] text-slate-500 sm:text-[10px] sm:tracking-[0.18em]">
+              <span className="font-[var(--font-dm-mono)] text-[9px] font-medium uppercase tracking-[0.17em] text-slate-500 sm:text-[10px] sm:tracking-[0.19em]">
                 What we build
               </span>
 
-              <span className="h-px w-10 bg-slate-300" />
+              <span className="h-px w-12 bg-slate-300/80" />
             </motion.div>
 
             <motion.h2
               variants={reveal}
-              className="font-[var(--font-dm-sans)] text-[1.85rem] font-semibold leading-[1.08] tracking-[-0.035em] text-[#071B36] min-[400px]:text-3xl sm:text-4xl lg:text-5xl"
+              className="max-w-2xl font-[var(--font-dm-sans)] text-[1.9rem] font-semibold leading-[1.06] tracking-[-0.04em] text-[#071B36] min-[400px]:text-3xl sm:text-4xl lg:text-5xl"
             >
               Digital solutions built around{" "}
-              <span className="text-[#0D2D5A]">real business needs.</span>
+              <span className="text-[#0D2D5A]/75">real business needs.</span>
             </motion.h2>
 
             <motion.p
@@ -417,11 +419,11 @@ export default function Services() {
           <motion.div variants={reveal}>
             <Link
               href="/services/"
-              className="group inline-flex shrink-0 items-center gap-2 font-[var(--font-dm-mono)] text-[9px] font-medium uppercase tracking-[0.12em] text-slate-400 transition-colors duration-300 hover:text-[#071B36] sm:text-[10px] sm:tracking-[0.14em]"
+              className="group inline-flex shrink-0 items-center gap-2 font-[var(--font-dm-mono)] text-[9px] font-medium uppercase tracking-[0.13em] text-slate-400 transition-all duration-400 hover:-translate-y-0.5 hover:text-[#071B36] sm:text-[10px] sm:tracking-[0.15em]"
             >
               View all services
               <svg
-                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -439,7 +441,7 @@ export default function Services() {
         <motion.div
           initial={{
             opacity: 0,
-            y: 30,
+            y: 26,
           }}
           whileInView={{
             opacity: 1,
@@ -447,7 +449,7 @@ export default function Services() {
           }}
           viewport={{ once: true, amount: 0.08 }}
           transition={{
-            duration: 0.8,
+            duration: 0.85,
             delay: 0.1,
             ease,
           }}
@@ -462,7 +464,7 @@ export default function Services() {
                 hidden: {},
                 visible: {
                   transition: {
-                    staggerChildren: 0.06,
+                    staggerChildren: 0.065,
                   },
                 },
               }}
@@ -480,7 +482,7 @@ export default function Services() {
                     variants={{
                       hidden: {
                         opacity: 0,
-                        x: -18,
+                        x: -16,
                       },
                       visible: {
                         opacity: 1,
@@ -497,10 +499,10 @@ export default function Services() {
                     whileTap={{
                       scale: 0.985,
                     }}
-                    className={`group relative flex h-[58px] w-[210px] shrink-0 items-center gap-3 rounded-xl border px-3.5 text-left transition-all duration-300 sm:w-[225px] lg:h-auto lg:w-full ${
+                    className={`group relative flex h-[60px] w-[210px] shrink-0 items-center gap-3 rounded-xl border px-3.5 text-left transition-all duration-400 sm:w-[225px] lg:h-auto lg:w-full ${
                       isActive
-                        ? "border-[#071B36] bg-[#071B36] text-white shadow-[0_16px_40px_rgba(7,27,54,0.12)]"
-                        : "border-transparent bg-white/60 text-[#53657D] hover:border-slate-200 hover:bg-white hover:text-[#071B36]"
+                        ? "border-[#071B36] bg-[#071B36] text-white shadow-[0_18px_45px_rgba(7,27,54,0.14)]"
+                        : "border-transparent bg-white/65 text-[#53657D] hover:border-slate-200/80 hover:bg-white hover:shadow-[0_10px_30px_rgba(7,27,54,0.04)] hover:text-[#071B36]"
                     }`}
                   >
                     {isActive && (
@@ -511,14 +513,14 @@ export default function Services() {
                           stiffness: 350,
                           damping: 30,
                         }}
-                        className="absolute inset-y-0 left-0 w-1 rounded-l-xl bg-[#FFC400]"
+                        className="absolute inset-y-2 left-0 w-1 rounded-r-full bg-[#FFC400]"
                       />
                     )}
 
                     <span
-                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-colors duration-300 ${
+                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-all duration-400 ${
                         isActive
-                          ? "bg-[#FFC400] text-[#071B36]"
+                          ? "bg-[#FFC400] text-[#071B36] shadow-[0_6px_20px_rgba(255,196,0,0.12)]"
                           : "bg-[#EEF2F6] text-slate-500 group-hover:bg-[#E5EBF2] group-hover:text-[#071B36]"
                       }`}
                     >
@@ -530,7 +532,11 @@ export default function Services() {
                     </span>
 
                     {isActive && (
-                      <span className="ml-auto h-1.5 w-1.5 shrink-0 rounded-full bg-[#FFC400]" />
+                      <motion.span
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="ml-auto h-1.5 w-1.5 shrink-0 rounded-full bg-[#FFC400]"
+                      />
                     )}
                   </motion.button>
                 );
@@ -602,8 +608,8 @@ export default function Services() {
             key={activeService}
             initial={{
               opacity: 0,
-              y: 18,
-              scale: 0.99,
+              y: 16,
+              scale: 0.992,
             }}
             animate={{
               opacity: 1,
@@ -611,11 +617,13 @@ export default function Services() {
               scale: 1,
             }}
             transition={{
-              duration: 0.55,
+              duration: 0.6,
               ease,
             }}
-            className="relative min-w-0 overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_20px_60px_rgba(7,27,54,0.055)]"
+            className="relative min-w-0 overflow-hidden rounded-[1.15rem] border border-slate-200/80 bg-white shadow-[0_25px_70px_rgba(7,27,54,0.065)]"
           >
+            <div className="pointer-events-none absolute right-0 top-0 h-40 w-40 rounded-full bg-blue-100/20 blur-3xl" />
+
             <div className="relative grid lg:grid-cols-[minmax(0,1fr)_280px]">
               <div className="min-w-0 p-5 sm:p-7 md:p-8 lg:p-10">
                 <motion.div
@@ -632,18 +640,22 @@ export default function Services() {
                 >
                   <motion.div variants={reveal} className="mb-7 sm:mb-8">
                     <div className="mb-5 flex items-center justify-between gap-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#071B36] text-[#FFC400] sm:h-11 sm:w-11">
+                      <motion.div
+                        whileHover={{ rotate: -3, scale: 1.03 }}
+                        transition={{ duration: 0.3 }}
+                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#071B36] text-[#FFC400] shadow-[0_10px_25px_rgba(7,27,54,0.12)] sm:h-11 sm:w-11"
+                      >
                         <span className="h-5 w-5">{active.icon}</span>
-                      </div>
+                      </motion.div>
 
-                      <span className="font-[var(--font-dm-mono)] text-[8px] uppercase tracking-[0.14em] text-slate-300 sm:text-[9px] sm:tracking-[0.16em]">
+                      <span className="font-[var(--font-dm-mono)] text-[8px] uppercase tracking-[0.15em] text-slate-300 sm:text-[9px] sm:tracking-[0.17em]">
                         0{activeService + 1} / 0{services.length}
                       </span>
                     </div>
 
                     <motion.h3
                       variants={reveal}
-                      className="font-[var(--font-dm-sans)] text-xl font-semibold leading-tight tracking-[-0.025em] text-[#071B36] min-[400px]:text-2xl sm:text-3xl"
+                      className="font-[var(--font-dm-sans)] text-xl font-semibold leading-tight tracking-[-0.03em] text-[#071B36] min-[400px]:text-2xl sm:text-3xl"
                     >
                       {active.title}
                     </motion.h3>
@@ -657,7 +669,7 @@ export default function Services() {
                   </motion.div>
 
                   <motion.div variants={reveal}>
-                    <p className="mb-4 font-[var(--font-dm-mono)] text-[8px] font-medium uppercase tracking-[0.14em] text-slate-400 sm:text-[9px] sm:tracking-[0.16em]">
+                    <p className="mb-4 font-[var(--font-dm-mono)] text-[8px] font-medium uppercase tracking-[0.15em] text-slate-400 sm:text-[9px] sm:tracking-[0.17em]">
                       What we deliver
                     </p>
 
@@ -691,10 +703,12 @@ export default function Services() {
                               },
                             },
                           }}
-                          className="flex min-w-0 items-start gap-3 font-[var(--font-dm-sans)] text-[13px] leading-5 text-[#26384E] sm:text-sm sm:leading-6"
+                          className="group flex min-w-0 items-start gap-3 font-[var(--font-dm-sans)] text-[13px] leading-5 text-[#26384E] sm:text-sm sm:leading-6"
                         >
-                          <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#FFC400]" />
-                          <span className="min-w-0">{item}</span>
+                          <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#FFC400] transition-transform duration-300 group-hover:scale-125" />
+                          <span className="min-w-0 transition-colors duration-300 group-hover:text-[#071B36]">
+                            {item}
+                          </span>
                         </motion.li>
                       ))}
                     </motion.ul>
@@ -703,12 +717,12 @@ export default function Services() {
                   <motion.div variants={reveal}>
                     <Link
                       href={active.link}
-                      className="group mt-8 inline-flex max-w-full items-center gap-2 font-[var(--font-dm-mono)] text-[9px] font-medium uppercase tracking-[0.11em] text-slate-400 transition-colors duration-300 hover:text-[#071B36] sm:mt-9 sm:text-[10px] sm:tracking-[0.13em]"
+                      className="group mt-8 inline-flex max-w-full items-center gap-2 font-[var(--font-dm-mono)] text-[9px] font-medium uppercase tracking-[0.12em] text-slate-400 transition-all duration-400 hover:-translate-y-0.5 hover:text-[#071B36] sm:mt-9 sm:text-[10px] sm:tracking-[0.14em]"
                     >
                       <span className="truncate">{active.linkText}</span>
 
                       <svg
-                        className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+                        className="h-4 w-4 shrink-0 transition-transform duration-500 group-hover:translate-x-1"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -724,7 +738,9 @@ export default function Services() {
                 </motion.div>
               </div>
 
-              <div className="min-w-0 border-t border-slate-200 bg-[#F8FAFC] p-5 sm:p-7 md:p-8 lg:border-l lg:border-t-0 lg:p-8">
+              <div className="relative min-w-0 border-t border-slate-200 bg-[#F8FAFC] p-5 sm:p-7 md:p-8 lg:border-l lg:border-t-0 lg:p-8">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(37,99,235,0.045),transparent_45%)]" />
+
                 <motion.div
                   initial="hidden"
                   animate="visible"
@@ -736,6 +752,7 @@ export default function Services() {
                       },
                     },
                   }}
+                  className="relative"
                 >
                   <motion.div
                     variants={reveal}
@@ -745,7 +762,7 @@ export default function Services() {
                       Technology
                     </span>
 
-                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#FFC400]" />
+                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#FFC400] shadow-[0_0_8px_rgba(255,196,0,0.35)]" />
                   </motion.div>
 
                   <motion.div
@@ -777,11 +794,11 @@ export default function Services() {
                           },
                         }}
                         whileHover={{
-                          y: -3,
+                          y: -4,
                         }}
-                        className="group flex min-h-[64px] min-w-0 flex-col justify-center gap-2 rounded-xl border border-slate-200 bg-white px-2.5 transition-shadow duration-300 hover:border-slate-300 hover:shadow-[0_8px_25px_rgba(7,27,54,0.05)] sm:min-h-[68px] sm:px-3"
+                        className="group flex min-h-[66px] min-w-0 flex-col justify-center gap-2 rounded-xl border border-slate-200/90 bg-white px-2.5 shadow-[0_4px_15px_rgba(7,27,54,0.02)] transition-all duration-400 hover:border-slate-300 hover:shadow-[0_12px_30px_rgba(7,27,54,0.07)] sm:min-h-[70px] sm:px-3"
                       >
-                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#F8FAFC]">
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#F8FAFC] transition-transform duration-400 group-hover:scale-105">
                           <img
                             src={technology.icon}
                             alt=""
@@ -791,7 +808,7 @@ export default function Services() {
                           />
                         </span>
 
-                        <span className="truncate font-[var(--font-dm-sans)] text-[10px] font-medium text-[#26384E] sm:text-[11px]">
+                        <span className="truncate font-[var(--font-dm-sans)] text-[10px] font-medium text-[#26384E] transition-colors duration-300 group-hover:text-[#071B36] sm:text-[11px]">
                           {technology.name}
                         </span>
                       </motion.div>
@@ -801,7 +818,7 @@ export default function Services() {
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3 border-t border-slate-100 px-5 py-3.5 sm:px-7 md:px-8 lg:px-10">
+            <div className="relative flex flex-wrap items-center gap-3 border-t border-slate-100 px-5 py-3.5 sm:px-7 md:px-8 lg:px-10">
               <span className="h-1 w-8 shrink-0 rounded-full bg-[#FFC400]" />
 
               <span className="font-[var(--font-dm-mono)] text-[7px] uppercase tracking-[0.12em] text-slate-300 min-[400px]:text-[8px] sm:tracking-[0.15em]">

@@ -41,6 +41,8 @@ const socialLinks = [
   { label: "in", ariaLabel: "LinkedIn", href: "#" },
 ];
 
+const ease = [0.22, 1, 0.36, 1];
+
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-[#071b36] text-white">
@@ -49,8 +51,8 @@ export default function Footer() {
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true }}
         transition={{
-          duration: 1.3,
-          ease: [0.22, 1, 0.36, 1],
+          duration: 1.1,
+          ease,
         }}
         className="absolute left-0 right-0 top-0 h-px origin-left bg-gradient-to-r from-transparent via-white/20 to-transparent"
       />
@@ -58,30 +60,30 @@ export default function Footer() {
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <motion.div
           animate={{
-            x: [0, 50, -25, 0],
-            y: [0, -30, 25, 0],
-            scale: [1, 1.12, 0.94, 1],
+            x: [0, 35, -18, 0],
+            y: [0, -22, 18, 0],
+            scale: [1, 1.08, 0.97, 1],
           }}
           transition={{
-            duration: 18,
+            duration: 22,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute -left-48 -top-48 h-[32rem] w-[32rem] rounded-full bg-blue-500/[0.045] blur-3xl"
+          className="absolute -left-48 -top-48 h-[32rem] w-[32rem] rounded-full bg-blue-500/[0.04] blur-3xl"
         />
 
         <motion.div
           animate={{
-            x: [0, -45, 25, 0],
-            y: [0, 30, -20, 0],
-            scale: [1, 0.9, 1.1, 1],
+            x: [0, -30, 18, 0],
+            y: [0, 22, -15, 0],
+            scale: [1, 0.95, 1.06, 1],
           }}
           transition={{
-            duration: 20,
+            duration: 24,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute -bottom-48 -right-48 h-[30rem] w-[30rem] rounded-full bg-[#ffc400]/[0.035] blur-3xl"
+          className="absolute -bottom-48 -right-48 h-[30rem] w-[30rem] rounded-full bg-[#ffc400]/[0.03] blur-3xl"
         />
 
         <motion.div
@@ -89,11 +91,11 @@ export default function Footer() {
             backgroundPosition: ["0px 0px", "72px 72px"],
           }}
           transition={{
-            duration: 16,
+            duration: 20,
             repeat: Infinity,
             ease: "linear",
           }}
-          className="absolute inset-0 opacity-[0.018]"
+          className="absolute inset-0 opacity-[0.016]"
           style={{
             backgroundImage:
               "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
@@ -106,11 +108,11 @@ export default function Footer() {
           whileInView={{ x: "120%", opacity: 1 }}
           viewport={{ once: true }}
           transition={{
-            duration: 2.2,
-            delay: 0.5,
-            ease: [0.22, 1, 0.36, 1],
+            duration: 2.4,
+            delay: 0.45,
+            ease,
           }}
-          className="absolute left-0 top-0 h-px w-1/3 bg-gradient-to-r from-transparent via-[#ffc400]/40 to-transparent"
+          className="absolute left-0 top-0 h-px w-1/3 bg-gradient-to-r from-transparent via-[#ffc400]/35 to-transparent"
         />
       </div>
 
@@ -120,9 +122,9 @@ export default function Footer() {
             <motion.div
               initial={{
                 opacity: 0,
-                x: -45,
-                y: 25,
-                filter: "blur(10px)",
+                x: -35,
+                y: 18,
+                filter: "blur(5px)",
               }}
               whileInView={{
                 opacity: 1,
@@ -132,21 +134,21 @@ export default function Footer() {
               }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{
-                duration: 1,
-                ease: [0.22, 1, 0.36, 1],
+                duration: 0.9,
+                ease,
               }}
               className="max-w-sm"
             >
               <Link href="/" className="group inline-flex items-center">
                 <motion.div
                   whileHover={{
-                    y: -7,
-                    rotate: -3,
-                    scale: 1.04,
+                    y: -5,
+                    rotate: -2,
+                    scale: 1.025,
                   }}
                   transition={{
-                    duration: 0.45,
-                    ease: [0.22, 1, 0.36, 1],
+                    duration: 0.4,
+                    ease,
                   }}
                 >
                   <Image
@@ -161,13 +163,13 @@ export default function Footer() {
               </Link>
 
               <motion.p
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{
-                  duration: 0.75,
-                  delay: 0.2,
-                  ease: [0.22, 1, 0.36, 1],
+                  duration: 0.7,
+                  delay: 0.16,
+                  ease,
                 }}
                 className="mt-6 font-dm-sans text-sm leading-6 text-slate-400"
               >
@@ -176,13 +178,13 @@ export default function Footer() {
               </motion.p>
 
               <motion.div
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{
-                  duration: 0.75,
-                  delay: 0.3,
-                  ease: [0.22, 1, 0.36, 1],
+                  duration: 0.7,
+                  delay: 0.24,
+                  ease,
                 }}
               >
                 <Link
@@ -193,10 +195,10 @@ export default function Footer() {
 
                   <motion.span
                     animate={{
-                      x: [0, 3, 0],
+                      x: [0, 2, 0],
                     }}
                     transition={{
-                      duration: 2,
+                      duration: 2.4,
                       repeat: Infinity,
                       ease: "easeInOut",
                     }}
@@ -210,8 +212,8 @@ export default function Footer() {
             <motion.div
               initial={{
                 opacity: 0,
-                y: 45,
-                filter: "blur(8px)",
+                y: 35,
+                filter: "blur(5px)",
               }}
               whileInView={{
                 opacity: 1,
@@ -220,16 +222,16 @@ export default function Footer() {
               }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{
-                duration: 0.9,
-                delay: 0.12,
-                ease: [0.22, 1, 0.36, 1],
+                duration: 0.85,
+                delay: 0.08,
+                ease,
               }}
             >
               <motion.span
-                initial={{ opacity: 0, x: -15 }}
+                initial={{ opacity: 0, x: -10 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.5, ease }}
                 className="font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#ffc400]/70"
               >
                 Explore
@@ -239,13 +241,13 @@ export default function Footer() {
                 {exploreLinks.map((item, index) => (
                   <motion.div
                     key={item.label}
-                    initial={{ opacity: 0, x: -18 }}
+                    initial={{ opacity: 0, x: -12 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{
-                      duration: 0.55,
-                      delay: 0.2 + index * 0.06,
-                      ease: [0.22, 1, 0.36, 1],
+                      duration: 0.5,
+                      delay: 0.14 + index * 0.05,
+                      ease,
                     }}
                   >
                     <Link
@@ -253,8 +255,9 @@ export default function Footer() {
                       className="group flex w-fit items-center gap-2 font-dm-sans text-sm text-slate-400 transition-colors duration-300 hover:text-[#ffc400]"
                     >
                       <motion.span
-                        initial={{ width: 0 }}
-                        whileHover={{ width: 12 }}
+                        initial={{ width: 0, opacity: 0 }}
+                        whileHover={{ width: 10, opacity: 1 }}
+                        transition={{ duration: 0.25, ease }}
                         className="h-px bg-[#ffc400]"
                       />
                       {item.label}
@@ -267,8 +270,8 @@ export default function Footer() {
             <motion.div
               initial={{
                 opacity: 0,
-                y: 45,
-                filter: "blur(8px)",
+                y: 35,
+                filter: "blur(5px)",
               }}
               whileInView={{
                 opacity: 1,
@@ -277,16 +280,16 @@ export default function Footer() {
               }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{
-                duration: 0.9,
-                delay: 0.2,
-                ease: [0.22, 1, 0.36, 1],
+                duration: 0.85,
+                delay: 0.14,
+                ease,
               }}
             >
               <motion.span
-                initial={{ opacity: 0, x: -15 }}
+                initial={{ opacity: 0, x: -10 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.5, ease }}
                 className="font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#ffc400]/70"
               >
                 Services
@@ -296,13 +299,13 @@ export default function Footer() {
                 {serviceLinks.map((item, index) => (
                   <motion.div
                     key={item.label}
-                    initial={{ opacity: 0, x: -18 }}
+                    initial={{ opacity: 0, x: -12 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{
-                      duration: 0.55,
-                      delay: 0.25 + index * 0.07,
-                      ease: [0.22, 1, 0.36, 1],
+                      duration: 0.5,
+                      delay: 0.18 + index * 0.055,
+                      ease,
                     }}
                   >
                     <Link
@@ -310,8 +313,9 @@ export default function Footer() {
                       className="group flex w-fit items-center gap-2 font-dm-sans text-sm text-slate-400 transition-colors duration-300 hover:text-[#ffc400]"
                     >
                       <motion.span
-                        initial={{ width: 0 }}
-                        whileHover={{ width: 12 }}
+                        initial={{ width: 0, opacity: 0 }}
+                        whileHover={{ width: 10, opacity: 1 }}
+                        transition={{ duration: 0.25, ease }}
                         className="h-px bg-[#ffc400]"
                       />
                       {item.label}
@@ -324,8 +328,8 @@ export default function Footer() {
             <motion.div
               initial={{
                 opacity: 0,
-                x: 40,
-                filter: "blur(8px)",
+                x: 30,
+                filter: "blur(5px)",
               }}
               whileInView={{
                 opacity: 1,
@@ -334,16 +338,16 @@ export default function Footer() {
               }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{
-                duration: 0.9,
-                delay: 0.28,
-                ease: [0.22, 1, 0.36, 1],
+                duration: 0.85,
+                delay: 0.2,
+                ease,
               }}
             >
               <motion.span
-                initial={{ opacity: 0, x: -15 }}
+                initial={{ opacity: 0, x: -10 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.5, ease }}
                 className="font-dm-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#ffc400]/70"
               >
                 Contact
@@ -353,13 +357,13 @@ export default function Footer() {
                 {contactLinks.map((item, index) => (
                   <motion.div
                     key={item.label}
-                    initial={{ opacity: 0, x: 15 }}
+                    initial={{ opacity: 0, x: 12 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{
-                      duration: 0.55,
-                      delay: 0.3 + index * 0.08,
-                      ease: [0.22, 1, 0.36, 1],
+                      duration: 0.5,
+                      delay: 0.22 + index * 0.06,
+                      ease,
                     }}
                   >
                     <a
@@ -373,13 +377,13 @@ export default function Footer() {
               </div>
 
               <motion.div
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{
-                  duration: 0.7,
-                  delay: 0.55,
-                  ease: [0.22, 1, 0.36, 1],
+                  duration: 0.65,
+                  delay: 0.42,
+                  ease,
                 }}
                 className="mt-7 flex items-center gap-3"
               >
@@ -390,8 +394,8 @@ export default function Footer() {
                     aria-label={item.ariaLabel}
                     initial={{
                       opacity: 0,
-                      scale: 0.7,
-                      y: 10,
+                      scale: 0.8,
+                      y: 8,
                     }}
                     whileInView={{
                       opacity: 1,
@@ -400,16 +404,16 @@ export default function Footer() {
                     }}
                     viewport={{ once: true }}
                     transition={{
-                      duration: 0.5,
-                      delay: 0.65 + index * 0.08,
-                      ease: [0.22, 1, 0.36, 1],
+                      duration: 0.45,
+                      delay: 0.5 + index * 0.07,
+                      ease,
                     }}
                     whileHover={{
-                      y: -5,
-                      scale: 1.1,
-                      rotate: index === 1 ? 0 : index === 0 ? -5 : 5,
+                      y: -4,
+                      scale: 1.06,
+                      rotate: index === 1 ? 0 : index === 0 ? -3 : 3,
                     }}
-                    whileTap={{ scale: 0.92 }}
+                    whileTap={{ scale: 0.94 }}
                     className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 font-dm-mono text-xs text-slate-400 transition-all duration-300 hover:border-[#ffc400]/30 hover:bg-[#ffc400] hover:text-[#071b36]"
                   >
                     {item.label}
@@ -433,9 +437,9 @@ export default function Footer() {
               amount: 0.2,
             }}
             transition={{
-              duration: 1.1,
-              delay: 0.2,
-              ease: [0.22, 1, 0.36, 1],
+              duration: 0.95,
+              delay: 0.15,
+              ease,
             }}
             className="mt-12 origin-center border-t border-white/10 pt-7 sm:mt-16 sm:pt-8"
           >
@@ -443,7 +447,7 @@ export default function Footer() {
               <motion.p
                 initial={{
                   opacity: 0,
-                  x: -20,
+                  x: -15,
                 }}
                 whileInView={{
                   opacity: 1,
@@ -451,8 +455,9 @@ export default function Footer() {
                 }}
                 viewport={{ once: true }}
                 transition={{
-                  duration: 0.7,
-                  delay: 0.35,
+                  duration: 0.65,
+                  delay: 0.25,
+                  ease,
                 }}
                 className="font-dm-sans text-xs text-slate-500 sm:text-sm"
               >
@@ -463,7 +468,7 @@ export default function Footer() {
               <motion.div
                 initial={{
                   opacity: 0,
-                  x: 20,
+                  x: 15,
                 }}
                 whileInView={{
                   opacity: 1,
@@ -471,8 +476,9 @@ export default function Footer() {
                 }}
                 viewport={{ once: true }}
                 transition={{
-                  duration: 0.7,
-                  delay: 0.4,
+                  duration: 0.65,
+                  delay: 0.3,
+                  ease,
                 }}
                 className="flex flex-wrap gap-x-5 gap-y-2"
               >
