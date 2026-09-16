@@ -115,7 +115,6 @@ export default function Hero() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Background Images */}
       <div className="absolute inset-0">
         <AnimatePresence mode="sync">
           <motion.div
@@ -141,16 +140,12 @@ export default function Hero() {
         </AnimatePresence>
       </div>
 
-      {/* Dark image overlay */}
       <div className="pointer-events-none absolute inset-0 bg-[#071B36]/70" />
 
-      {/* Left-side readability gradient */}
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(7,27,54,0.96)_0%,rgba(7,27,54,0.84)_32%,rgba(7,27,54,0.52)_58%,rgba(7,27,54,0.28)_100%)]" />
 
-      {/* Bottom image fade */}
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(0deg,rgba(7,27,54,0.72)_0%,transparent_35%,transparent_100%)]" />
 
-      {/* Ambient background */}
       <motion.div
         animate={{
           scale: [1, 1.018, 1],
@@ -193,10 +188,9 @@ export default function Hero() {
 
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,transparent_38%,rgba(0,0,0,0.2)_100%)]" />
 
-      <div className="relative mx-auto flex h-full max-w-[1500px] flex-col justify-center px-5 py-20 sm:px-8 lg:px-12 xl:px-16">
-        {" "}
-        <div className="grid items-center lg:grid-cols-1">
-          {/* LEFT CONTENT */}
+      <div className="relative mx-auto flex h-full max-w-[1500px] flex-col px-5 py-12 lg:py-20 sm:px-8 lg:px-12 xl:px-16">
+        <div className="grid h-full items-center lg:grid-cols-1">
+          {" "}
           <AnimatePresence mode="wait">
             <motion.div
               key={activeSlide}
@@ -211,7 +205,7 @@ export default function Hero() {
                   ease,
                 },
               }}
-              className="relative z-20 max-w-3xl lg:pr-4"
+              className="relative z-20 flex min-h-[620px] max-w-3xl flex-col justify-start pt-12 lg:pt-22  sm:pt-28 lg:min-h-[620px] lg:justify-center lg:pt-0 lg:pr-4"
             >
               <motion.div
                 variants={itemVariants}
@@ -328,7 +322,6 @@ export default function Hero() {
             </motion.div>
           </AnimatePresence>
         </div>
-        {/* Bottom navigation */}
         <motion.div
           initial={{
             opacity: 0,
